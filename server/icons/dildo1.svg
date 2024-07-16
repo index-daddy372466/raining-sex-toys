@@ -1,0 +1,21 @@
+<!-- icon666.com - MILLIONS vector ICONS FREE -->
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<linearGradient id="linear-gradient" gradientUnits="userSpaceOnUse" x1="32" x2="32" y1="-.778" y2="66.427">
+		<stop offset="0" stop-color="#38d6a4" />
+		<stop offset=".171" stop-color="#32caae" />
+		<stop offset=".478" stop-color="#22abc8" />
+		<stop offset=".884" stop-color="#0879f2" />
+		<stop offset=".999" stop-color="#0069ff" />
+	</linearGradient>
+	<linearGradient id="linear-gradient-2" x1="30" x2="30" xlink:href="#linear-gradient" y1="-.778" y2="66.427" />
+	<linearGradient id="linear-gradient-3" x1="30.75" x2="30.75" xlink:href="#linear-gradient" y1="-.778" y2="66.427" />
+	<linearGradient id="linear-gradient-4" x1="28.5" x2="28.5" xlink:href="#linear-gradient" y1="-.778" y2="66.427" />
+	<linearGradient id="linear-gradient-5" x1="31.5" x2="31.5" xlink:href="#linear-gradient" y1="-.778" y2="66.427" />
+	<g id="_09-ass_plug" data-name="09-ass plug">
+		<path d="m45.929 62.628a19.355 19.355 0 0 0 -6.73-8.572l-.845-.6a1.939 1.939 0 0 1 -.716-2.2 3.987 3.987 0 0 0 0-2.5l-.669-2a10.491 10.491 0 0 0 .685-18.087 8 8 0 0 0 -.87-12.068 5.954 5.954 0 0 0 -1.049-8.279 4.926 4.926 0 0 0 1.265-3.322 5 5 0 0 0 -10 0 4.926 4.926 0 0 0 1.265 3.312 5.954 5.954 0 0 0 -1.049 8.279 8 8 0 0 0 -.87 12.068 10.491 10.491 0 0 0 .685 18.087l-.669 2a3.987 3.987 0 0 0 0 2.5 1.939 1.939 0 0 1 -.716 2.2l-.845.6a19.355 19.355 0 0 0 -6.73 8.572 1 1 0 0 0 .929 1.382h26a1 1 0 0 0 .929-1.372zm-22.429-25.128a8.512 8.512 0 0 1 5.037-7.757 1 1 0 0 0 .145-1.743 6 6 0 0 1 .554-10.319 1 1 0 0 0 .187-1.649 3.968 3.968 0 0 1 .961-6.682 1 1 0 0 0 .1-1.776 2.969 2.969 0 0 1 -1.484-2.574 3 3 0 0 1 6 0 2.969 2.969 0 0 1 -1.487 2.572 1 1 0 0 0 .1 1.776 3.968 3.968 0 0 1 .961 6.682 1 1 0 0 0 .187 1.649 6 6 0 0 1 .557 10.321 1 1 0 0 0 .145 1.745 8.5 8.5 0 1 1 -11.963 7.755zm-2.953 24.5a17.3 17.3 0 0 1 1.2-2h12.253a1 1 0 0 0 0-2h-10.633a17.41 17.41 0 0 1 2.6-2.316l.846-.6a3.93 3.93 0 0 0 1.451-4.463 1.931 1.931 0 0 1 0-1.234l.619-1.857a10.512 10.512 0 0 0 6.242 0l.619 1.857a1.931 1.931 0 0 1 0 1.234 3.931 3.931 0 0 0 1.452 4.464l.845.6a17.41 17.41 0 0 1 2.592 2.315h-2.633a1 1 0 0 0 0 2h4.256a17.3 17.3 0 0 1 1.2 2z" fill="url(#linear-gradient)" />
+		<path d="m31 19a3 3 0 0 0 -3 3 1 1 0 0 0 2 0 1 1 0 0 1 1-1 1 1 0 0 0 0-2z" fill="url(#linear-gradient-2)" />
+		<path d="m31 12.5a.5.5 0 0 1 .5-.5 1 1 0 0 0 0-2 2.5 2.5 0 0 0 -2.5 2.5 1 1 0 0 0 2 0z" fill="url(#linear-gradient-3)" />
+		<path d="m30 32a4 4 0 0 0 -4 4 1 1 0 0 0 2 0 2 2 0 0 1 2-2 1 1 0 0 0 0-2z" fill="url(#linear-gradient-4)" />
+		<path d="m32 5a1 1 0 0 0 0-2 2 2 0 0 0 -2 2 1 1 0 0 0 2 0z" fill="url(#linear-gradient-5)" />
+	</g>
+</svg>

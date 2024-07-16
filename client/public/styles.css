@@ -1,0 +1,220 @@
+/* copy flex template */
+/* display: Flex;
+flex-direction: column;
+align-items: center;
+justify-content: center; */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+body {
+  background: silver;
+  display: Flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+/* level */
+#level {
+  z-index: 990;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: scale(20);
+  opacity: 0.45;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+/* spacehship */
+#spaceship-container {
+  width: 100%;
+  height: 5vh;
+  background-image: linear-gradient(360deg, rgb(107, 40, 40), rgb(246, 38, 38));
+  position: fixed;
+  transition: 0.75s;
+  display: Flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+/* spaceship appears */
+.hi-spaceship {
+  top: 0;
+  left: 0;
+}
+/* spaceship disappears */
+.bye-spaceship {
+  top: -10vh;
+  left: 0;
+}
+/* container for the holes */
+#holes-container {
+  width: 95%;
+  height: 100%;
+  display: Flex;
+  flex-direction: row;
+  /* subect to change */
+  align-items: center;
+  justify-content: space-evenly;
+}
+/* list item for the hole  */
+.list-item {
+  height: 100%;
+  width: 100%;
+  display: Flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* hole actual */
+.list-item > div {
+  height: 15px;
+  width: 75%;
+  border: 3.25px solid #000;
+  border-radius: 50%;
+  background: rgb(244, 46, 201);
+  /* box-shadow: inset 0 0 3px 3px #000000; */
+  /* transition: 0.5s; */
+}
+.list-item:nth-child(even) > div {
+  animation: startup 4s infinite alternate;
+}
+.list-item:nth-child(odd) > div {
+  animation: startdown 4s infinite alternate;
+}
+/* @keyframes startup {
+  from {
+    transform: translate(0, 5px);
+  }
+  to {
+    transform: translate(0, -5px) scale(.75);
+  }
+}
+@keyframes startdown {
+  from {
+    transform: translate(0, -5px);
+    transform: translate(0, -5px) scale(.75);
+  }
+  to {
+    transform: translate(0, 5px);
+  }
+} */
+/* start game  */
+#start-btn {
+  z-index: 999;
+  height: 20px;
+  width: 200px;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 3px dotted #f00;
+  display: Flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  transition: 0.25s;
+  font-size: 25px;
+  box-shadow: 0 0.5rem 10px 0.4px #33333399;
+}
+/* hover over start btn */
+#start-btn:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  background: #000;
+  color: #f00;
+  border: 3px dotted #fff;
+}
+/* appear/disappear button */
+.appear {
+  display: block;
+}
+.disappear {
+  display: none;
+  visibility: hidden;
+}
+
+#test-svg {
+  height: 75px;
+  width: 75px;
+  border: 3px solid #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-image {
+  position: absolute;
+  height: 85px;
+  width: 85px;
+  z-index: 998;
+  cursor: pointer;
+}
+.new-image:hover {
+  /* box-shadow: 0 0 0.8px 8px gold; */
+  border-radius: 50%;
+  overflow:hidden;
+  padding:5px;
+  animation: pulse_hover .25s infinite alternate;
+}
+
+@keyframes pulse_hover {
+  from {
+    box-shadow: none;
+  }
+  to {
+    box-shadow: 0 0 5px 8px #cde803;
+    opacity: 0.75;
+  }
+}
+.shoot-load {
+  display: none;
+}
+
+/* warning */
+#warning {
+  border: 2px dotted red;
+  border-radius: 12px;
+  width: 90%;
+  height: 5px;
+  position: absolute;
+  opacity: 0;
+  transition: 0.25s;
+  z-index: 989;
+  pointer-events:none;
+}
+.warning-animate {
+  animation: warning 0.15s infinite alternate;
+}
+@keyframes warning {
+  from {
+    box-shadow: none;
+    height:5px;
+  }
+  to {
+    box-shadow: 0 0 0.12px 10px #f00;
+    opacity: 0.5;
+  }
+}
+
+/* class - no pointer events */
+.no-pointer {
+  pointer-events: none;
+}

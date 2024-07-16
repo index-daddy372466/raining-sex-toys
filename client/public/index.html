@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Raining Dildos App</title>
+  </head>
+  <body>
+    <!-- level indicator in background -->
+    <h1 id="level" class="no-pointer"></h1>
+    <!-- dildos fall from spaceship's exit holes -->
+    <!-- spaceship container (top screen) -->
+    <div
+      id="spaceship-container"
+      class="ship-container container-ship container-spaceship spaceship-container-class bye-spaceship"
+    >
+      <!-- flexible holes container - ul -->
+      <ul
+        id="holes-container"
+        class="container-holes hole-container hole-ul ul-hole"
+      >
+        <!-- actial holes - list-items -->
+        <li class="holes item list-item">
+          <div class="circle circle-hole hole-circle"></div>
+        </li>
+        <li class="holes item list-item">
+          <div class="circle circle-hole hole-circle"></div>
+        </li>
+        <li class="holes item list-item">
+          <div class="circle circle-hole hole-circle"></div>
+        </li>
+      </ul>
+    </div>
+    <!-- start button -->
+    <button id="start-btn" class="appear">Start</button>
+    <!-- warning -->
+    <hr id="warning" />
+  </body>
+  <script src="./main.js" type="module"></script>
+</html>
