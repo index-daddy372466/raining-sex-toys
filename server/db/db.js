@@ -63,5 +63,5 @@ mySqlConnect();
 //     });
 //   });
 // };
-// mySqlGetConnection();
+// mySqlGetConnection();w
 module.exports = { pool, mysqlObj };
