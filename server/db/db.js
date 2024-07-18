@@ -64,7 +64,4 @@ mySqlConnect();
 //   });
 // };
 // mySqlGetConnection();
-
-mysqlObj.connection.query('select * from users ')
-
 module.exports = { pool, mysqlObj };
