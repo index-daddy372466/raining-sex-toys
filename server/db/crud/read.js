@@ -17,9 +17,12 @@ router.route("/mysql/review/:data").get((req, res) => {
       return err ? console.log(err) : res.json({ scores: result });
     });
   } else if (/users/i.test(data)) {
-    let users = mysqlObj.connection.query("select * from users", (err, result) => {
-      return err ? console.log(err) : res.json({ users: result });
-    });
+    let users = mysqlObj.connection.query(
+      "select * from users",
+      (err, result) => {
+        return err ? console.log(err) : res.json({ users: result });
+      }
+    );
   } else {
     res.send("not recognized");
   }
@@ -50,30 +53,35 @@ router.route("/psql/review/:data/:id").get(async (req, res) => {
   if (/scores/i.test(data)) {
   } else if (/users/i.test(data)) {
     let getUser = new QueryCommand("psql", id);
-    // console.log(getUser)
     let found = await getUser.getUserById();
-    return found.length<1 ? res.send('no users found') : res.json({ data: found });
+    return found.length < 1
+      ? res.send("no users found")
+      : res.json({ data: found });
   } else {
     res.send("not recognized");
   }
 });
 // get user by id - mysql
-router.route("/mysql/review/:data/:id").get(async (req, res) => {
+router.route("/mysql/review/:data/:id").get(async(req, res) => {
   const { data, id } = req.params;
 
   if (/scores/i.test(data)) {
   } else if (/users/i.test(data)) {
-    let getUser = new QueryCommand("mysql", id);
-    // console.log(getUser)
-    let found = getUser.getUserById();
-    return found.length<1 ? res.send('no users found') : res.json({ data: found });
+    mysqlObj.connection.query(
+      "select * from users where user_id=?",
+      id,
+      (err, result) => {
+        let data = JSON.parse(JSON.stringify(result));
+        return err ? console.log(err) : res.json({ data: data });
+      }
+    );
   } else {
     res.send("not recognized");
   }
 });
 
 // get user by email - psql
-router.route("/psql/review/:data/:email").get(async (req, res) => {
+router.route("/psql/review/:data/:email").get((req, res) => {
   const { data, email } = req.params;
   if (/scores/i.test(data)) {
   } else if (/users/i.test(data)) {
@@ -82,7 +90,7 @@ router.route("/psql/review/:data/:email").get(async (req, res) => {
   }
 });
 // get user by email - mysql
-router.route("/mysql/review/:data/:email").get(async (req, res) => {
+router.route("/mysql/review/:data/:email").get((req, res) => {
   const { data, email } = req.params;
   if (/scores/i.test(data)) {
   } else if (/users/i.test(data)) {

@@ -5,17 +5,19 @@ class QueryCommand {
   constructor(framework, id, email) {
     this.framework = framework;
     this.id = id;
-    // this.email = email;
   }
 
   // statics
   async getUserById() {
     if (this.framework == "mysql") {
-      return mysqlObj.connection.query(
+      mysqlObj.connection.query(
         "select * from users where user_id=?",
         this.id,
-        (err, found) => {
-          return err ? console.log(err) : found;
+        (err, result) => {
+          let data = JSON.parse(JSON.stringify(result));
+          console.log(data);
+          if (err) console.log(err);
+          return data;
         }
       );
     } else if (this.framework == "psql") {

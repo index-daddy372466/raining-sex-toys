@@ -40,26 +40,4 @@ const mySqlConnect = () => {
 };
 mySqlConnect();
 
-// connect via query()
-// const mySqlQuery = () => {
-//   mysqlObj.connection.query("select * from scores", (err, result) => {
-//     if (err) console.log(err);
-//     console.log(result[0]);
-//   });
-// };
-// mySqlQuery();
-
-// connect via getConnection()
-// const mySqlGetConnection = () => {
-//   mysqlObj.pool.getConnection((err, pool) => {
-//     if (err) console.log(err);
-//     pool.query("select * from users left join scores on users.user_id = scores.u_id order by user_id desc", (err, result) => {
-//       return err ? console.log(err) : result.forEach(r=>{
-//         const {user_id,display_name,best,average} = r;
-//         console.log({user_id,display_name,best,average})
-//       });
-//     });
-//   });
-// };
-// mySqlGetConnection();w
 module.exports = { pool, mysqlObj };
