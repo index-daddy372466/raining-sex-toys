@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css">
-    <title>test area</title>
+    <title>Register</title>
   </head>
   <body>
     <!-- mysql -->
@@ -12,7 +12,7 @@
     <form action="/create/mysql/spawn" method="POST">
       <input type="text" name="display_name" />
       <input type="email" name="email" />
-      <input type="text" name="gender" />
+      <input type="password" name="password">
       <button type="submit">Submit</button>
     </form>
     <!-- psql -->
@@ -20,7 +20,7 @@
     <form action="/create/psql/spawn" method="POST">
       <input type="text" name="display_name" />
       <input type="email" name="email" />
-      <input type="text" name="gender" />
+      <input type="password" name="password">
       <button type="submit">Submit</button>
     </form>
   </body>

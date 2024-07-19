@@ -3,11 +3,21 @@ const router = express.Router();
 const { mysqlObj, pool } = require("../db.js");
 const pg = require("../db.js").pool;
 const QueryCommand = require("../commands.js");
+const path = require('path')
 
 // middleware
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
-router.use(express.static("client/test"));
+
+router.route("/login").get((req, res) => {
+  res.sendFile(path.resolve(__dirname, "../../../client/views/login.html"));
+});
+router.route("/login").post(async (req, res) => {
+  const { email, password } = req.body;
+  console.log(email);
+  console.log(password);
+  res.send("test");
+});
 
 // read user/scores data - mysql
 router.route("/mysql/review/:data").get((req, res) => {
@@ -62,7 +72,7 @@ router.route("/psql/review/:data/:id").get(async (req, res) => {
   }
 });
 // get user by id - mysql
-router.route("/mysql/review/:data/:id").get(async(req, res) => {
+router.route("/mysql/review/:data/:id").get(async (req, res) => {
   const { data, id } = req.params;
 
   if (/scores/i.test(data)) {

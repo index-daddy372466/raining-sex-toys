@@ -65,7 +65,7 @@ CREATE TABLE public.users (
     user_id integer NOT NULL,
     display_name character varying(60) NOT NULL,
     email character varying(60) NOT NULL,
-    gender character varying(25)
+    password character varying(120) NOT NULL
 );
 
 
@@ -119,7 +119,7 @@ COPY public.scores (score_id, best, current, average, u_id) FROM stdin;
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: kylestech95
 --
 
-COPY public.users (user_id, display_name, email, gender) FROM stdin;
+COPY public.users (user_id, display_name, email, password) FROM stdin;
 \.
 
 
