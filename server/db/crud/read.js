@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { connection, pool } = require("../db.js").mysqlObj;
+const { mysqlObj, pool } = require("../db.js");
 const pg = require("../db.js").pool;
 const QueryCommand = require("../commands.js");
 
@@ -17,7 +17,7 @@ router.route("/mysql/review/:data").get((req, res) => {
       return err ? console.log(err) : res.json({ scores: result });
     });
   } else if (/users/i.test(data)) {
-    let users = connection.query("select * from users", (err, result) => {
+    let users = mysqlObj.connection.query("select * from users", (err, result) => {
       return err ? console.log(err) : res.json({ users: result });
     });
   } else {
@@ -43,16 +43,52 @@ router.route("/psql/review/:data").get(async (req, res) => {
   }
 });
 
+// get user by id - psql
 router.route("/psql/review/:data/:id").get(async (req, res) => {
   const { data, id } = req.params;
+
   if (/scores/i.test(data)) {
-    let getUserById = new QueryCommand("mysql", 1);
-    res.json({ output: getUserById });
   } else if (/users/i.test(data)) {
-    let getUserById = new QueryCommand("psql", 1);
-    res.json({ output: getUserById });
+    let getUser = new QueryCommand("psql", id);
+    // console.log(getUser)
+    let found = await getUser.getUserById();
+    return found.length<1 ? res.send('no users found') : res.json({ data: found });
   } else {
     res.send("not recognized");
   }
 });
+// get user by id - mysql
+router.route("/mysql/review/:data/:id").get(async (req, res) => {
+  const { data, id } = req.params;
+
+  if (/scores/i.test(data)) {
+  } else if (/users/i.test(data)) {
+    let getUser = new QueryCommand("mysql", id);
+    // console.log(getUser)
+    let found = getUser.getUserById();
+    return found.length<1 ? res.send('no users found') : res.json({ data: found });
+  } else {
+    res.send("not recognized");
+  }
+});
+
+// get user by email - psql
+router.route("/psql/review/:data/:email").get(async (req, res) => {
+  const { data, email } = req.params;
+  if (/scores/i.test(data)) {
+  } else if (/users/i.test(data)) {
+  } else {
+    res.send("not recognized");
+  }
+});
+// get user by email - mysql
+router.route("/mysql/review/:data/:email").get(async (req, res) => {
+  const { data, email } = req.params;
+  if (/scores/i.test(data)) {
+  } else if (/users/i.test(data)) {
+  } else {
+    res.send("not recognized");
+  }
+});
+
 module.exports = router;

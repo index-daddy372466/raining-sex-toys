@@ -1,28 +1,49 @@
 const pool = require("./db.js").pool;
-const { mysqlObj } = require("./db.js").mysqlObj;
- class QueryCommand {
+const { mysqlObj } = require("./db.js");
+class QueryCommand {
   //constructor
-  constructor(framework, id) {
+  constructor(framework, id, email) {
+    this.framework = framework;
     this.id = id;
+    // this.email = email;
   }
 
   // statics
-  static async getUsersById(framework, id) {
-    if (framework == "mysql") {
-      mysqlObj.connection.query(
-        `select * from users where id = ?`,
-        id,
+  async getUserById() {
+    if (this.framework == "mysql") {
+      return mysqlObj.connection.query(
+        "select * from users where user_id=?",
+        this.id,
         (err, found) => {
           return err ? console.log(err) : found;
         }
       );
-    } else if (framework == "psql") {
-      let found = await pool.query(`select * from users where id = $1`, [id]);
+    } else if (this.framework == "psql") {
+      let found = await pool.query(`select * from users where user_id=$1`, [
+        this.id,
+      ]);
       return !found ? console.log("psql - no users found") : found.rows;
     } else {
       throw new Error("No framework detected");
     }
-    return new QueryCommand(id);
+  }
+  async getUsersByEmail() {
+    if (this.framework == "mysql") {
+      mysqlObj.connection.query(
+        `select * from users where email = ?`,
+        this.email,
+        (err, found) => {
+          return err ? console.log(err) : found;
+        }
+      );
+    } else if (this.framework == "psql") {
+      let found = await pool.query(`select * from users where email = $1`, [
+        this.email,
+      ]);
+      return !found ? console.log("psql - no users found") : found.rows;
+    } else {
+      throw new Error("No framework detected");
+    }
   }
 }
 

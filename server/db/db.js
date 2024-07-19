@@ -40,7 +40,6 @@ const mySqlConnect = () => {
 };
 mySqlConnect();
 
-
 // connect via query()
 // const mySqlQuery = () => {
 //   mysqlObj.connection.query("select * from scores", (err, result) => {
@@ -49,7 +48,6 @@ mySqlConnect();
 //   });
 // };
 // mySqlQuery();
-
 
 // connect via getConnection()
 // const mySqlGetConnection = () => {
