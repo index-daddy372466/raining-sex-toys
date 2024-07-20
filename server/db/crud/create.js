@@ -13,7 +13,7 @@ router.route("/register").get((req, res) => {
   res.sendFile(path.resolve(__dirname, "../../../client/views/register.html"));
 });
 // create a user with mysql
-router.route("/mysql/spawn").post(async (req, res) => {
+router.route("/mysql/register").post(async (req, res) => {
   const { display_name, email, password } = req.body;
   // are users existent in the db?
   await fetch("http://localhost:9934/read/mysql/review/users")
@@ -40,7 +40,7 @@ router.route("/mysql/spawn").post(async (req, res) => {
     });
 });
 // create a user with psql
-router.route("/psql/spawn").post(async (req, res) => {
+router.route("/psql/register").post(async (req, res) => {
   const { display_name, email, password } = req.body;
   await fetch("http://localhost:9934/read/psql/review/users")
     .then((r) => r.json())
