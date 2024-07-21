@@ -18,10 +18,11 @@ router.use(
 );
 router.use(passport.initialize())
 router.use(passport.session())
+router.use(express.static('client/game'))
 // home or game if authenticated
-router.get('/',checkAuthenticated,(req,res)=>{
-  res.redirect('/game')
-})
+// router.get('/',(req,res)=>{
+//   res.sendFile(path.resolve(__dirname, '../../client/game/index.html'))
+// })
 // get svgs/icons
 router.route("/svgs").get((req, res) => {
   // get absolute path from icons dir
@@ -52,11 +53,11 @@ router.route("/level/:wave").post((req, res) => {
 
 module.exports = router;
 
-function checkAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    console.log("you are authenticated");
-    next();
-  }
-  console.log("you are not authenticated!!!");
-  res.redirect("/home");
-}
+// function checkAuthenticated(req, res, next) {
+//   if (req.isAuthenticated()) {
+//     console.log("you are authenticated");
+//     next();
+//   }
+//   console.log("you are not authenticated!!!");
+//   res.redirect("/home");
+// }
