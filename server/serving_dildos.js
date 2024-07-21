@@ -33,6 +33,14 @@ app.route("/login").post(
   })
 );
 
+// home or game if authenticated
+app.get('/',checkNotAuthenticated,(req,res)=>{
+  res.redirect('/home')
+})
+// home
+app.route("/home").get(checkNotAuthenticated, (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../client/views/home.html"));
+});
 // register
 app.get("/register", checkNotAuthenticated, (req, res) => {
   res.sendFile(path.resolve(__dirname, "../client/views/register.html"));
@@ -41,9 +49,7 @@ app.get("/register", checkNotAuthenticated, (req, res) => {
 app.route("/login").get(checkNotAuthenticated, (req, res) => {
   res.sendFile(path.resolve(__dirname, "../client/views/login.html"));
 });
-app.route("/home").get(checkNotAuthenticated, (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/views/home.html"));
-});
+
 // listen
 app.listen(PORT, () => {
   console.log("listening on port " + PORT);
@@ -58,11 +64,4 @@ function checkNotAuthenticated(req, res, next) {
     res.redirect("/game");
   }
 }
-function checkAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    console.log("you are authenticated");
-    next();
-  }
-  console.log("you are not authenticated!!!");
-  res.redirect("/home");
-}
+
