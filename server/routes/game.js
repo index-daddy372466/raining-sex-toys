@@ -5,7 +5,13 @@ const path = require("path");
 let svg = [];
 
 router.use(express.json());
+router.use(express.static("client/game"));
 
+
+// router.route('/').get((req,res)=>{
+//   console.log('game is fired!')
+//     res.sendFile(path.resolve(__dirname,'../../client/game/index.html'))
+// })
 // get svgs/icons
 router.route("/svgs").get((req, res) => {
   // get absolute path from icons dir

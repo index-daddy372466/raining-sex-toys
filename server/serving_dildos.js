@@ -14,7 +14,6 @@ initializePassport(passport);
 // middleware
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("client/public"));
 routingMiddleware(app);
 app.use(
   session({
@@ -27,21 +26,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 // app.use(helmet());
 
-app.get('/wtf',(req,res)=>{
-  console.log(req.user)
-  res.send('test')
-})
 app.route("/login").post(
   passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: "/game",
     failureRedirect: "/login",
   })
 );
 
-// home
-app.route("/").get(checkAuthenticated,(req,res)=>{
-  console.log('you are authenticated and home base')
-})
 // register
 app.get("/register", checkNotAuthenticated, (req, res) => {
   res.sendFile(path.resolve(__dirname, "../client/views/register.html"));
@@ -49,6 +40,9 @@ app.get("/register", checkNotAuthenticated, (req, res) => {
 // login
 app.route("/login").get(checkNotAuthenticated, (req, res) => {
   res.sendFile(path.resolve(__dirname, "../client/views/login.html"));
+});
+app.route("/home").get(checkNotAuthenticated, (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../client/views/home.html"));
 });
 // listen
 app.listen(PORT, () => {
@@ -61,16 +55,14 @@ function checkNotAuthenticated(req, res, next) {
     next();
   } else {
     console.log("you are authenticated");
-    console.log(req)
-    res.redirect("/");
+    res.redirect("/game");
   }
 }
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
-    console.log(req)
     console.log("you are authenticated");
     next();
   }
   console.log("you are not authenticated!!!");
-  res.redirect("/login");
+  res.redirect("/home");
 }
