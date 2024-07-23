@@ -40,11 +40,11 @@ app.route("/login").post(
 );
 
 // home or game if authenticated
-app.get('/',checkNotAuthenticated,(req,res)=>{
+app.get('/',(req,res)=>{
   res.redirect('/home')
 })
 // home
-app.route("/home").get(checkNotAuthenticated, (req, res) => {
+app.route("/home").get( (req, res) => {
   res.render("home.ejs",{
     isAuthenticated:req.isAuthenticated(),
   });

@@ -35,6 +35,7 @@ body{
     justify-content: start;
     width:100%;
     padding:0 0 .5rem .5rem;
+    gap:.5rem;
 }
 
 .nav-list-container>li>a{

@@ -2,8 +2,10 @@ import startGame from "./func/startGame.js";
 import readySetGo from "./func/readySetGo.js";
 import playGame from "./func/playGame.js";
 
+
+const logout = document.querySelectorAll('.link-link')
+console.log(logout)
 // console.log(score_items);
-// import shootDildo from "../func/shootDildo.js";
 const spaceship = document.getElementById("spaceship-container"),
   start = document.getElementById("start-btn"),
   holes = document.querySelectorAll(".list-item>div"),
