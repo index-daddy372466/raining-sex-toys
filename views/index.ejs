@@ -3,9 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles2.css" />
+    <link rel="stylesheet" href="/styles2.css" />
     <title>Raining Dildos App</title>
   </head>
+  <%-
+        '<style>'
+        + include(`./styles2.css`)
+        + '</style>'
+    %>
   <body>
     <!-- level indicator in background -->
     <h1 id="level" class="no-pointer"></h1>
@@ -36,6 +41,7 @@
     <button id="start-btn" class="appear">Start</button>
     <!-- warning -->
     <hr id="warning" />
+    <% if(bool){%>
     <section id="scoreboard-container">
       <ul class="scoreboard-list-container">
         <li class="scoreboard-list-item">
@@ -60,6 +66,7 @@
         </li>
       </ul>
     </section>
+    <% } %>
   </body>
-  <script src="main.js" type="module"></script>
+<script src="main.js" type="module"></script>   
 </html>

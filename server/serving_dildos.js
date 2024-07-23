@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
-// const helmet = require("helmet");
+// const helmet = require("helmet");  
 const PORT = !process.env.PORT ? 9934 : process.env.PORT;
 const path = require("path");
 const passport = require("passport");
@@ -11,6 +11,9 @@ const routingMiddleware = require("./routingMiddleware.js");
 const initializePassport = require("./passport.config.js");
 initializePassport(passport);
 
+
+// app.set('views', path.join(__dirname, '../client/views'));
+app.set('view engine','ejs')
 // middleware
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
