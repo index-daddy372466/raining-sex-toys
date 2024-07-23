@@ -7,7 +7,6 @@ class QueryCommand {
     this.id = id;
   }
 
-  // statics
   async getUserById() {
     if (this.framework == "mysql") {
       mysqlObj.connection.query(
@@ -45,6 +44,18 @@ class QueryCommand {
       return !found ? console.log("psql - no users found") : found.rows;
     } else {
       throw new Error("No framework detected");
+    }
+  }
+  async postScore() {
+
+    if(this.framework == 'mysql'){
+      // method
+    }
+    else if (this.framework == 'psql'){
+      // method
+    }
+    else{
+      throw new Error("No framework detected")
     }
   }
 }
