@@ -1,5 +1,6 @@
 import getWaves from "./getWaves.js";
 import levelUp from "./levelUp.js";
+let current = document.querySelectorAll(".scoreboard-list-item");
 
 export default function playGame(arr, posi, btn, ship) {
   const warning = document.getElementById("warning"),
@@ -81,8 +82,9 @@ export default function playGame(arr, posi, btn, ship) {
       for (let i = 0; i < images.length; i++) {
         images[i].onclick = (e) => {
           copy_wave -= 1;
-          console.log(copy_wave);
+          // console.log(copy_wave);
           e.target.classList.add("shoot-load");
+          current[1].children[1].textContent = +current[1].children[1].textContent + 1;
         };
       }
     },
@@ -117,6 +119,7 @@ export default function playGame(arr, posi, btn, ship) {
       warning.classList.add("disappear");
       btn.textContent = "Start";
       document.getElementById("level").textContent = 0;
+      current[1].children[1].textContent = 0;
       setTimeout(() => {
         btn.classList.add("appear");
         warning.classList.add("appear");

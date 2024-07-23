@@ -2,6 +2,7 @@ import startGame from "./func/startGame.js";
 import readySetGo from "./func/readySetGo.js";
 import playGame from "./func/playGame.js";
 
+// console.log(score_items);
 // import shootDildo from "../func/shootDildo.js";
 const spaceship = document.getElementById("spaceship-container"),
   start = document.getElementById("start-btn"),
@@ -16,7 +17,7 @@ const spaceship = document.getElementById("spaceship-container"),
 
 // set level to 0;
 level_element.textContent = 0;
-let warnHeight = 1.90;
+let warnHeight = 1.9;
 
 // set empty array
 let posi = [];
@@ -32,6 +33,7 @@ holes.forEach((hole, idx) => {
   position.y = holes[idx].getBoundingClientRect().y;
   posi.push(position);
 });
+
 // start the game
 startGame(
   start,
@@ -40,5 +42,5 @@ startGame(
   posi,
   readySetGo,
   playGame,
-  level_element.textContent
+  level_element.textContent,
 );

@@ -7,7 +7,8 @@ export default function startGame(
   posi,
   readySetGo,
   playGame,
-  level
+  level,
+
 ) {
   // prepare style for start button once clickes
   const btn_clicked = `background:#333;color:rgb(42, 170, 138);border:none;`;
