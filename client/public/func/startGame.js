@@ -12,9 +12,10 @@ export default function startGame(
   // prepare style for start button once clickes
   const btn_clicked = `background:#333;color:rgb(42, 170, 138);border:none;`;
   // click button to start game
-  btn.onclick = (e) => {
+  btn.onclick = async (e) => {
     // no pointer events
     e.target.classList.add("no-pointer");
+
     // ready set go on button
     readySetGo(e.target, btn_clicked, level);
 

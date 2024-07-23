@@ -179,6 +179,6 @@ export default function playGame(arr, posi, btn, ship) {
     +document.getElementById("level").textContent % 2 == 0 &&
       +document.getElementById("level").textContent < 1
       ? 1250
-      : .75*(1250 - +document.getElementById("level").textContent)
+      : 0.75 * (1250 - +document.getElementById("level").textContent)
   );
 }

@@ -16,12 +16,13 @@ const spaceship = document.getElementById("spaceship-container"),
 
 // set level to 0;
 level_element.textContent = 0;
+let warnHeight = 1.90;
 
 // set empty array
 let posi = [];
 
 // position the warning bar
-warning.style.top = `${window.innerHeight - window.innerHeight / 3}px`;
+warning.style.top = `${window.innerHeight / warnHeight}px`;
 
 // get (x,y) position of current holes in ship
 // push (x,y) position into "posi" array

@@ -12,12 +12,13 @@ const initializePassport = require("./passport.config.js");
 initializePassport(passport);
 
 
-// app.set('views', path.join(__dirname, '../client/views'));
+app.use(express.static('client/public'))
+app.set('views', path.resolve(__dirname,'../client/views'));
+// app.use(express.static('client/public'))
 app.set('view engine','ejs')
 // middleware
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
-routingMiddleware(app);
 app.use(
   session({
     secret: process.env.SECRET,
@@ -28,6 +29,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 // app.use(helmet());
+routingMiddleware(app);
+
 
 app.route("/login").post(
   passport.authenticate("local", {
@@ -42,15 +45,17 @@ app.get('/',checkNotAuthenticated,(req,res)=>{
 })
 // home
 app.route("/home").get(checkNotAuthenticated, (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/views/home.html"));
+  res.render("home.ejs",{
+    isAuthenticated:req.isAuthenticated(),
+  });
 });
 // register
 app.get("/register", checkNotAuthenticated, (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/views/register.html"));
+  res.render('register.ejs');
 });
 // login
 app.route("/login").get(checkNotAuthenticated, (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/views/login.html"));
+  res.render("login.ejs");
 });
 
 // listen
