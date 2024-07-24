@@ -5,7 +5,8 @@
   "main": "server/serving_dildos.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon serving_dildos.js"
+    "dev": "nodemon serving_dildos.js",
+    "start":"node serving_dildos.js"
   },
   "keywords": [],
   "author": "",
