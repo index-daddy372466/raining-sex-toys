@@ -31,6 +31,19 @@ const mysqlObj = {
   }),
 };
 
+// sequelize
+const Sequelize = require('sequelize')
+
+const sequelize = new Sequelize(process.env.URI,{
+    dialect:'postgres',
+    dialectOptions:{
+      ssl:{
+        rejectUnauthorized:true
+      }
+    }
+
+})
+
 const mySqlConnect = () => {
   // validate mysql connection
   mysqlObj.connection.connect(function (err) {

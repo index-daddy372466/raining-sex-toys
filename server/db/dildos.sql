@@ -27,7 +27,6 @@ SET default_table_access_method = heap;
 CREATE TABLE public.scores (
     score_id integer NOT NULL,
     best integer NOT NULL,
-    current integer NOT NULL,
     average integer NOT NULL,
     u_id integer NOT NULL
 );
@@ -111,7 +110,7 @@ ALTER TABLE ONLY public.users ALTER COLUMN user_id SET DEFAULT nextval('public.u
 -- Data for Name: scores; Type: TABLE DATA; Schema: public; Owner: kylestech95
 --
 
-COPY public.scores (score_id, best, current, average, u_id) FROM stdin;
+COPY public.scores (score_id, best, average, u_id) FROM stdin;
 \.
 
 
