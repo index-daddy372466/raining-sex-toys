@@ -1,10 +1,10 @@
 import startGame from "./func/startGame.js";
 import readySetGo from "./func/readySetGo.js";
 import playGame from "./func/playGame.js";
+import scoreBoard from './func/scoreBoard.js'
 
 
 const logout = document.querySelectorAll('.link-link')
-console.log(logout)
 // console.log(score_items);
 const spaceship = document.getElementById("spaceship-container"),
   start = document.getElementById("start-btn"),
@@ -46,3 +46,5 @@ startGame(
   playGame,
   level_element.textContent,
 );
+
+scoreBoard(document.querySelector('.scoreboard-list-container'))
