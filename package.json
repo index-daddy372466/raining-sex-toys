@@ -5,7 +5,8 @@
   "main": "server/serving_dildos.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon serving_dildos.js"
+    "dev": "nodemon serving_dildos.js",
+    "start":"node server/serving_dildos.js"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +25,7 @@
     "nodemon": "^3.1.4",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "pg-pool": "^3.6.2"
+    "pg-pool": "^3.6.2",
+    "sequelize": "^6.37.3"
   }
 }
