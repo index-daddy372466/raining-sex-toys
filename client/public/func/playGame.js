@@ -1,5 +1,6 @@
 import getWaves from "./getWaves.js";
 import levelUp from "./levelUp.js";
+import postFetch from "./postFetch.js";
 let current = document.querySelectorAll(".scoreboard-list-item");
 
 export default function playGame(arr, posi, btn, ship) {
@@ -96,6 +97,7 @@ export default function playGame(arr, posi, btn, ship) {
       return;
     },
     gameOver: (images) => {
+      postFetch('/update/score',{score:+current[1].children[1].textContent}).then(r=>r.json()).then(data=>console.log(data.score))
       const revertStyle = `height: 20px;
   width: 200px;
   padding: 2rem;

@@ -47,15 +47,21 @@ class QueryCommand {
     }
   }
   async postScore() {
-
-    if(this.framework == 'mysql'){
+    if (this.framework == "mysql") {
       // method
-    }
-    else if (this.framework == 'psql'){
+    } else if (this.framework == "psql") {
       // method
-    }
-    else{
-      throw new Error("No framework detected")
+      let updated = await pool.query(
+        `insert into scores(best,average,u_id) values(0,0,$1)`,
+        [this.id]
+      );
+      try {
+        return !updated ? console.log('psql - insert failure') : console.log('insert complete')
+      } catch (err) {
+        throw err;
+      }
+    } else {
+      throw new Error("No framework detected");
     }
   }
 }
