@@ -13,7 +13,6 @@ router.route('/').get((req,res)=>{
 router.route("/score").post((req, res) => {
     const { score } = req.body;
     console.log(score)
-    
     res.json({score:score})
   });
 

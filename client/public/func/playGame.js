@@ -1,7 +1,7 @@
 import getWaves from "./getWaves.js";
 import levelUp from "./levelUp.js";
 import postFetch from "./postFetch.js";
-let current = document.querySelectorAll(".scoreboard-list-item");
+let board = document.querySelectorAll(".scoreboard-list-item");
 
 export default function playGame(arr, posi, btn, ship) {
   const warning = document.getElementById("warning"),
@@ -85,7 +85,13 @@ export default function playGame(arr, posi, btn, ship) {
           copy_wave -= 1;
           // console.log(copy_wave);
           e.target.classList.add("shoot-load");
-          current[1].children[1].textContent = +current[1].children[1].textContent + 1;
+          console.log([...board].length == 0);
+          if ([...board].length > 0) {
+            board[1].children[1].textContent =
+              +board[1].children[1].textContent + 1;
+          } else {
+            return null;
+          }
         };
       }
     },
@@ -97,7 +103,11 @@ export default function playGame(arr, posi, btn, ship) {
       return;
     },
     gameOver: (images) => {
-      postFetch('/update/score',{score:+current[1].children[1].textContent}).then(r=>r.json()).then(data=>console.log(data.score))
+      // if (board) {
+      //   postFetch("/update/score", { score: +board[1].children[1].textContent })
+      //     .then((r) => r.json())
+      //     .then((data) => console.log(data.score));
+      // }
       const revertStyle = `height: 20px;
   width: 200px;
   padding: 2rem;
@@ -115,15 +125,19 @@ export default function playGame(arr, posi, btn, ship) {
       ship.classList.remove("hi-spaceship");
       ship.classList.add("bye-spaceship");
       btn.classList.remove("disappear");
+      btn.textContent = "Start";
+      btn.classList.add("appear");
       btn.classList.remove("no-pointer");
       btn.style = revertStyle;
       warning.classList.remove("appear");
       warning.classList.add("disappear");
-      btn.textContent = "Start";
       document.getElementById("level").textContent = 0;
-      current[1].children[1].textContent = 0;
+      if ([...board].length > 0) {
+        board[1].children[1].textContent = 0;
+      } else {
+        return null;
+      }
       setTimeout(() => {
-        btn.classList.add("appear");
         warning.classList.add("appear");
         warning.classList.remove("disappear");
       }, 750);

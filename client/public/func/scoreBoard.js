@@ -1,4 +1,5 @@
 export default async function scoreBoard(board) {
+  if(!board) return null
   let arr = [...board.children];
   let id = 2;
   // fetch scores by user id
