@@ -3,9 +3,11 @@
     padding:0;
     box-sizing: border-box;
 }
-
+h1{
+    color:#f00;
+}
 body{
-    background:red;
+    background:silver;
     display:flex;
     flex-direction: column;
     align-items: center;

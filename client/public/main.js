@@ -4,6 +4,20 @@ import playGame from "./func/playGame.js";
 import scoreBoard from './func/scoreBoard.js'
 
 
+
+// scoreboard tile transition on load (enter game)
+let board = document.querySelectorAll(".scoreboard-list-item");
+let arr = [...board];
+window.addEventListener("load", (e) => {
+  console.log(arr)
+  arr.forEach((block, idx) => {
+    setTimeout(() => {
+      arr[idx].classList.add("hide-blocks");
+      arr[idx].classList.add("show-blocks");
+      console.log(arr[idx])
+    }, 275 * (idx + 1));
+  });
+});
 const logout = document.querySelectorAll('.link-link')
 // console.log(score_items);
 const spaceship = document.getElementById("spaceship-container"),

@@ -252,3 +252,11 @@ body {
 .scoreboard-list-container>li.scoreboard-list-item>li{
   
 }
+
+.hide-blocks{
+  transform:translate(-200px,0);
+}
+.show-blocks{
+  transform:translate(0,0);
+  transition:.25s;
+}
