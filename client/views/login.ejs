@@ -4,9 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="auth.css">
+    <link rel="stylesheet" href="/index.css">
     <title>Login</title>
   </head>
   <body>
+    <!-- nav -->
+    <%- include('partials/unsecured/login.ejs') %>
     <!-- login -->
     <h1>Login</h1>
     <form action="/login" method="POST">
