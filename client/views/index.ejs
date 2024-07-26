@@ -37,9 +37,11 @@
     <button id="start-btn" class="appear">Start</button>
     <!-- warning -->
     <hr id="warning" />
-    <% if(isAuthenticated){%>
-    <%- include('partials/secured/scoreboard.ejs') %>
-    <% } %>
+    <% if(!isAuthenticated){%>
+      <%- include('partials/unsecured/scoreboard.ejs') %>
+      <% } else { %>
+      <%- include('partials/secured/scoreboard.ejs') %>
+          <% } %>
   </body>
   <script type="module" src="/main.js"></script>
 </html>

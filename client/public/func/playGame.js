@@ -87,8 +87,10 @@ export default function playGame(arr, posi, btn, ship) {
           e.target.classList.add("shoot-load");
           console.log([...board].length == 0);
           if ([...board].length > 0) {
-            board[1].children[1].textContent =
-              +board[1].children[1].textContent + 1;
+            let curr = [...board].find(target=>/current/g.test(target.textContent));
+
+            curr.children[1].textContent =
+              +curr.children[1].textContent + 1;
           } else {
             return null;
           }
