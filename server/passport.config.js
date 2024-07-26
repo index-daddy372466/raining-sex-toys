@@ -6,26 +6,33 @@ const LocalStrategy = require("passport-local").Strategy;
 function initialize(passport) {
   // get user by email address
   const getUserByEmail = async (email) => {
-    return await fetch("http://localhost:9934/read/psql/review/users")
-      .then((r) => r.json())
-      .then(async (d) => {
-        if (!d.users) console.log("no data present");
-        if (!d.users) JSON.parse(JSON.stringify({ err: "no data present" }));
-        return [...d.users].find((user, index) => {
-          return user.email === email;
-        });
-      });
+    try{
+      let getUsers = await pg.query('select * from users where email=$1',[email])
+      if(getUsers.rows.length<1){
+        console.log('no user found')
+      }
+      else{
+        return getUsers.rows[0]
+      }
+    }
+    catch(err){
+      console.log(err)
+    }
   };
   // get user by id
   const getUserById = async(id) => {
-    await fetch("http://localhost:9934/read/psql/review/users")
-      .then((r) => r.json())
-      .then((d) => {
-        if (!d.users) console.log("no-data present");
-        return [...d.users].find((user, index) => {
-          return user.user_id == id;
-        });
-      });
+    try{
+      let getUsers = await pg.pool('select * from users where user_id=$1',[id])
+      if(getUsers.rows.length<1){
+        console.log('no user found')
+      }
+      else{
+        return getUsers.rows[0]
+      }
+    }
+    catch(err){
+      console.log(err)
+    }
   };
   const authenticateUser = async (email, password, done) => {
     const user = await getUserByEmail(email);
