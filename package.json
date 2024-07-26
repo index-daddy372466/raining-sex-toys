@@ -31,5 +31,8 @@
     "passport-local": "^1.0.0",
     "pg-pool": "^3.6.2",
     "sequelize": "^6.37.3"
+  },
+  "dependencies": {
+    "sqlite3": "^5.1.7"
   }
 }
