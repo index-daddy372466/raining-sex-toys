@@ -2,6 +2,7 @@ import getWaves from "./getWaves.js";
 import levelUp from "./levelUp.js";
 import postFetch from "./postFetch.js";
 let board = document.querySelectorAll(".scoreboard-list-item");
+let nav = document.getElementById('nav-container')
 
 export default function playGame(arr, posi, btn, ship) {
   const warning = document.getElementById("warning"),
@@ -87,16 +88,18 @@ export default function playGame(arr, posi, btn, ship) {
           e.target.classList.add("shoot-load");
           console.log([...board].length == 0);
           if ([...board].length > 0) {
-            let curr = [...board].find(target=>/current/g.test(target.textContent));
+            let current = [...board].filter(x=>/current/g.test(x.children[0].textContent))
 
-            curr.children[1].textContent =
-              +curr.children[1].textContent + 1;
-          } else {
-            return null;
-          }
+      if (current) {
+        console.log(current)
+        current[0].children[1].textContent  = +current[0].children[1].textContent + 1;
+      } else {
+        return null;
+      }
         };
       }
-    },
+    }
+  },
     flashWarning: () => {
       warning.classList.add("warning-animate");
       setTimeout(() => {
@@ -122,6 +125,7 @@ export default function playGame(arr, posi, btn, ship) {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   transition: 0.25s;
   font-size: 25px;`;
+  nav.style.display = 'block'
 
       images.forEach((img) => img.classList.add("shoot-load"));
       ship.classList.remove("hi-spaceship");
@@ -134,8 +138,11 @@ export default function playGame(arr, posi, btn, ship) {
       warning.classList.remove("appear");
       warning.classList.add("disappear");
       document.getElementById("level").textContent = 0;
-      if ([...board].length > 0) {
-        board[1].children[1].textContent = 0;
+
+      let current = [...board].filter(x=>/current/g.test(x.children[0].textContent))
+
+      if (current) {
+        current[0].children[1].textContent = 0;
       } else {
         return null;
       }

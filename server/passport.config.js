@@ -22,7 +22,7 @@ function initialize(passport) {
   // get user by id
   const getUserById = async(id) => {
     try{
-      let getUsers = await pg.pool('select * from users where user_id=$1',[id])
+      let getUsers = await pg.query('select * from users where user_id=$1',[id])
       if(getUsers.rows.length<1){
         console.log('no user found')
       }
