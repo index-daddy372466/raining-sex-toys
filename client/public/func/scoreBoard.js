@@ -1,7 +1,9 @@
+import token from "./token.js";
+let uTok = await token()
 export default async function scoreBoard(board) {
   if (!board || (board && board.length < 2)) return null;
   let arr = [...board.children];
-  let id = 2;
+  let id = uTok;
   // fetch scores by user id
   if (board.length > 2) {
     await fetch("/read/psql/review/scores/" + id)
@@ -22,7 +24,7 @@ export default async function scoreBoard(board) {
         if (arr[2]) {
           let attempts = arr[2];
           console.log(attempts);
-          attempts.children[1].textContent = attemptData;
+          attempts.children[1].textContent = id;
           //   attempts.textContent = attemptData
         }
 

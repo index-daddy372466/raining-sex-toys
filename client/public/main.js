@@ -1,24 +1,24 @@
 import startGame from "./func/startGame.js";
 import readySetGo from "./func/readySetGo.js";
 import playGame from "./func/playGame.js";
-import scoreBoard from './func/scoreBoard.js'
-
-
-
+import scoreBoard from "./func/scoreBoard.js";
+import token from "./func/token.js";
+let uTok = await token()
 // scoreboard tile transition on load (enter game)
 let board = document.querySelectorAll(".scoreboard-list-item");
+let scoreboard = document.querySelector(".scoreboard-list-container")
 let arr = [...board];
 window.addEventListener("load", (e) => {
-  console.log(arr)
+  console.log(arr);
   arr.forEach((block, idx) => {
     setTimeout(() => {
       arr[idx].classList.add("hide-blocks");
       arr[idx].classList.add("show-blocks");
-      console.log(arr[idx])
+      console.log(arr[idx]);
     }, 275 * (idx + 1));
   });
 });
-const logout = document.querySelectorAll('.link-link')
+const logout = document.querySelectorAll(".link-link");
 // console.log(score_items);
 const spaceship = document.getElementById("spaceship-container"),
   start = document.getElementById("start-btn"),
@@ -59,11 +59,7 @@ startGame(
   posi,
   readySetGo,
   playGame,
-  level_element.textContent,
+  level_element.textContent
 );
 
-scoreBoard(document.querySelector('.scoreboard-list-container'))
-
-
-// access cookie
-console.log(document.cookie)
+scoreBoard(scoreboard);

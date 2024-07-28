@@ -6,8 +6,22 @@ const svg = [];
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
+router.route('/token').get((req,res)=>{
+  if(req.isAuthenticated()) {
+    console.log(req.session)
+    res.json({token:req.session})
+  }
+  else{
+    res.json({token:'no token (not authenticated)'})
+  }
+})
 router.route("/").get((req, res) => {
-if(req.isAuthenticated())console.log(req.user)
+  if (req.isAuthenticated()) {
+    console.log(req.session)
+    req.session.identity = req.user.user_id;
+    // console.log(req.session)
+  }
+  console.log(req.session);
   res.render("index", {
     isAuthenticated: req.isAuthenticated(),
   });
@@ -44,7 +58,5 @@ router.route("/level/:wave").post((req, res) => {
     res.json({ api: "type not found" });
   }
 });
-
-
 
 module.exports = router;

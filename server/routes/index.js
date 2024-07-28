@@ -10,7 +10,8 @@ const { readdirSync, readFileSync } = require("fs");
 const path = require("path");
 const svg = [];
 const passport = require('passport')
-
+const cookieParser  = require('cookie-parser')
+router.use(cookieParser())
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
@@ -22,7 +23,6 @@ router.route("/login").post(
       failureRedirect: "/login",
     })
   );
-  
   // home or game if authenticated
   router.get('/',(req,res)=>{
     res.redirect('/home')
