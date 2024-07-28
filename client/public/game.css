@@ -37,8 +37,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transform: scale(20);
   opacity: 0.45;
+  font-size:299px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 /* spacehship */

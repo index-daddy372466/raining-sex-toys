@@ -108,11 +108,6 @@ export default function playGame(arr, posi, btn, ship) {
       return;
     },
     gameOver: (images) => {
-      // if (board) {
-      //   postFetch("/update/score", { score: +board[1].children[1].textContent })
-      //     .then((r) => r.json())
-      //     .then((data) => console.log(data.score));
-      // }
       const revertStyle = `height: 20px;
   width: 200px;
   padding: 2rem;

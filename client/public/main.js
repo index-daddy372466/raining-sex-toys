@@ -32,6 +32,7 @@ const spaceship = document.getElementById("spaceship-container"),
     });
 
 // set level to 0;
+//edit: removing textcontent to prevent mobile blur
 level_element.textContent = 0;
 let warnHeight = 1.9;
 
