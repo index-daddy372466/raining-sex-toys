@@ -64,7 +64,7 @@ CREATE TABLE public.users (
     user_id integer NOT NULL,
     display_name character varying(60) NOT NULL,
     email character varying(60) NOT NULL,
-    password character varying(120) NOT NULL
+    password character varying(300) NOT NULL
 );
 
 
@@ -119,6 +119,7 @@ COPY public.scores (score_id, best, average, u_id) FROM stdin;
 --
 
 COPY public.users (user_id, display_name, email, password) FROM stdin;
+1	la	la@la.com	$2b$11$tb98Y.pJniFHfOJa6vA0z.EQkC3ZZTW4MQhd9U29L4I4bl6qCO.46
 \.
 
 
@@ -133,7 +134,7 @@ SELECT pg_catalog.setval('public.scores_score_id_seq', 1, false);
 -- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kylestech95
 --
 
-SELECT pg_catalog.setval('public.users_user_id_seq', 1, false);
+SELECT pg_catalog.setval('public.users_user_id_seq', 1, true);
 
 
 --

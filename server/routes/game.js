@@ -7,6 +7,7 @@ const svg = [];
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 router.route("/").get((req, res) => {
+if(req.isAuthenticated())console.log(req.user)
   res.render("index", {
     isAuthenticated: req.isAuthenticated(),
   });

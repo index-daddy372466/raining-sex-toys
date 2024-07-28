@@ -63,3 +63,7 @@ startGame(
 );
 
 scoreBoard(document.querySelector('.scoreboard-list-container'))
+
+
+// access cookie
+console.log(document.cookie)

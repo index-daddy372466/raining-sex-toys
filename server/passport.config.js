@@ -22,6 +22,7 @@ function initialize(passport) {
   // get user by id
   const getUserById = async(id) => {
     try{
+      console.log(id)
       let getUsers = await pg.query('select * from users where user_id=$1',[id])
       if(getUsers.rows.length<1){
         console.log('no user found')
@@ -61,8 +62,8 @@ function initialize(passport) {
   passport.serializeUser(function (user, done) {
     return done(null, user);
   });
-  passport.deserializeUser(function (id, done) {
-    return done(null, getUserById(id));
+  passport.deserializeUser(async function (user, done) {
+    return done(null, await getUserById(user.user_id));
   });
 }
 module.exports = initialize;

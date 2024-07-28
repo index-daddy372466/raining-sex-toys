@@ -29,6 +29,7 @@ router.route("/login").post(
   })
   // home
   router.route("/home").get( (req, res) => {
+    if(req.isAuthenticated())console.log('yes queen')
     res.render("home.ejs",{
       isAuthenticated:req.isAuthenticated(),
     });
