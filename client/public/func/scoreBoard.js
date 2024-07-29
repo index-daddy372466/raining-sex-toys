@@ -1,12 +1,18 @@
+
 export default async function scoreBoard(board) {
+  const token = await fetch(document.location.origin+'/game/token').then(r=>r.json()).then(d=> d.token)
   if (!board || (board && board.length < 2)) return null;
   let arr = [...board.children];
-  let id = 1;
+  let id = token.identity;
+  console.log(id)
+  console.log(typeof(id))
   // fetch scores by user id
-  if (board.length > 2) {
+  // console.log(board)
+  if (board.children.length > 2) {
     await fetch("/read/psql/review/scores/" + id)
       .then((r) => r.json())
       .then((data) => {
+        // console.log(data)
         let scores = data.data[0];
         let attemptData = data.attempts;
 
@@ -19,8 +25,7 @@ export default async function scoreBoard(board) {
         //   fetch attempts
         if (arr[2]) {
           let attempts = arr[2];
-          attempts.children[1].textContent = id;
-          //   attempts.textContent = attemptData
+          attempts.children[1].textContent = attemptData;
         }
 
         // fetch average score
@@ -30,4 +35,5 @@ export default async function scoreBoard(board) {
         }
       });
   }
+  console.log(token)
 }
