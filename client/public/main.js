@@ -2,18 +2,19 @@ import startGame from "./func/startGame.js";
 import readySetGo from "./func/readySetGo.js";
 import playGame from "./func/playGame.js";
 import scoreBoard from "./func/scoreBoard.js";
-import token from "./func/token.js";
-let uTok = await token()
+
 // scoreboard tile transition on load (enter game)
 let board = document.querySelectorAll(".scoreboard-list-item");
 let scoreboard = document.querySelector(".scoreboard-list-container")
 let arr = [...board];
+console.log(arr)
 window.addEventListener("load", (e) => {
   console.log(arr);
   arr.forEach((block, idx) => {
+    console.log(block)
     setTimeout(() => {
-      arr[idx].classList.add("hide-blocks");
-      arr[idx].classList.add("show-blocks");
+      block.classList.remove("hide-blocks");
+      block.classList.add("show-blocks");
       console.log(arr[idx]);
     }, 275 * (idx + 1));
   });

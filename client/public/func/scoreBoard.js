@@ -1,9 +1,7 @@
-import token from "./token.js";
-let uTok = await token()
 export default async function scoreBoard(board) {
   if (!board || (board && board.length < 2)) return null;
   let arr = [...board.children];
-  let id = uTok;
+  let id = 1;
   // fetch scores by user id
   if (board.length > 2) {
     await fetch("/read/psql/review/scores/" + id)
@@ -11,19 +9,16 @@ export default async function scoreBoard(board) {
       .then((data) => {
         let scores = data.data[0];
         let attemptData = data.attempts;
-        console.log(attemptData);
 
         // fetch top score
         if (arr[0]) {
           let topScore = arr[0];
-          console.log(topScore);
           topScore.children[1].textContent = scores.best;
         }
 
         //   fetch attempts
         if (arr[2]) {
           let attempts = arr[2];
-          console.log(attempts);
           attempts.children[1].textContent = id;
           //   attempts.textContent = attemptData
         }
@@ -31,7 +26,6 @@ export default async function scoreBoard(board) {
         // fetch average score
         if (arr[3]) {
           let avgScore = arr[3];
-          console.log(avgScore);
           avgScore.children[1].textContent = scores.average;
         }
       });

@@ -1,9 +1,6 @@
 import getWaves from "./getWaves.js";
 import levelUp from "./levelUp.js";
 import postFetch from "./postFetch.js";
-import token from "./token.js";
-let uTok = await token()
-console.log(uTok)
 let board = document.querySelectorAll(".scoreboard-list-item");
 let nav = document.getElementById('nav-container')
 
