@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
-// const helmet = require("helmet");
+const helmet = require("helmet");
 const PORT = !process.env.PORT ? 9934 : process.env.PORT;
 const path = require("path");
 const passport = require("passport");
@@ -12,14 +12,14 @@ const initializePassport = require("./passport.config.js");
 const MemoryStore = require("memorystore")(session);
 const nocache = require("nocache");
 const cookieParser = require('cookie-parser')
-//var cookieSession = require('cookie-session');
+
 
 initializePassport(passport);
-app.use(express.static("client/public"));
 app.set("views", path.resolve(__dirname, "../client/views"));
 // app.use(express.static('client/public'))
 app.set("view engine", "ejs");
 // middleware
+app.use(express.static("client/public"));
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(
@@ -35,13 +35,7 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-// cookie session
-
-// app.use(cookieSession({
-//     keys: ['secret']
-// }));
-
-// app.use(helmet());
+app.use(helmet());
 routingMiddleware(app);
 app.use(nocache());
 
