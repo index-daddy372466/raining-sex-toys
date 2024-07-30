@@ -2,7 +2,7 @@ import getWaves from "./getWaves.js";
 import levelUp from "./levelUp.js";
 import postFetch from "./postFetch.js";
 let board = document.querySelectorAll(".scoreboard-list-item");
-let nav = document.getElementById('nav-container')
+let nav = document.getElementById("nav-container");
 
 export default function playGame(arr, posi, btn, ship) {
   const warning = document.getElementById("warning"),
@@ -86,20 +86,21 @@ export default function playGame(arr, posi, btn, ship) {
           copy_wave -= 1;
           // console.log(copy_wave);
           e.target.classList.add("shoot-load");
-          console.log([...board].length == 0);
           if ([...board].length > 0) {
-            let current = [...board].filter(x=>/current/g.test(x.children[0].textContent))
+            let current = [...board].filter((x) =>
+              /current/g.test(x.children[0].textContent)
+            );
 
-      if (current) {
-        console.log(current)
-        current[0].children[1].textContent  = +current[0].children[1].textContent + 1;
-      } else {
-        return null;
-      }
+            if (current) {
+              current[0].children[1].textContent =
+                +current[0].children[1].textContent + 1;
+            } else {
+              return null;
+            }
+          }
         };
       }
-    }
-  },
+    },
     flashWarning: () => {
       warning.classList.add("warning-animate");
       setTimeout(() => {
@@ -107,7 +108,7 @@ export default function playGame(arr, posi, btn, ship) {
       }, 500);
       return;
     },
-    gameOver: (images) => {
+    gameOver: async (images) => {
       const revertStyle = `height: 20px;
   width: 200px;
   padding: 2rem;
@@ -120,7 +121,7 @@ export default function playGame(arr, posi, btn, ship) {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   transition: 0.25s;
   font-size: 25px;`;
-  nav.style.display = 'block'
+      nav.style.display = "block";
 
       images.forEach((img) => img.classList.add("shoot-load"));
       ship.classList.remove("hi-spaceship");
@@ -134,17 +135,32 @@ export default function playGame(arr, posi, btn, ship) {
       warning.classList.add("disappear");
       document.getElementById("level").textContent = 0;
 
-      let current = [...board].filter(x=>/current/g.test(x.children[0].textContent))
+      let current = [...board].filter((x) =>
+        /current/g.test(x.children[0].textContent)
+      );
 
-      if (current) {
-        current[0].children[1].textContent = 0;
-      } else {
-        return null;
-      }
       setTimeout(() => {
         warning.classList.add("appear");
         warning.classList.remove("disappear");
       }, 750);
+      let bestScore = +[...board][0].children[1].textContent;
+      let currScore = +current[0].children[1].textContent;
+      console.log(currScore);
+      console.log(bestScore)
+      if (currScore > bestScore) {
+        [...board][0].children[1].textContent = currScore
+        const token = await fetch(document.location.origin + "/game/token")
+          .then((r) => r.json())
+          .then((d) => d.token);
+        let id = token.identity;
+        let bestScoreUrl = document.location.origin + "/update/score/best/" + id;
+        postFetch(bestScoreUrl, { score: currScore })
+          .then((r) => r.json())
+          .then((d) => {
+            return d.score
+          });
+      }
+      current[0].children[1].textContent = 0;
     },
   };
 

@@ -7,15 +7,14 @@ import scoreBoard from "./func/scoreBoard.js";
 let board = document.querySelectorAll(".scoreboard-list-item");
 let scoreboard = document.querySelector(".scoreboard-list-container")
 let arr = [...board];
-console.log(arr)
+// console.log(arr)
 window.addEventListener("load", (e) => {
-  console.log(arr);
+  // console.log(arr);
   arr.forEach((block, idx) => {
-    console.log(block)
+    // console.log(block)
     setTimeout(() => {
       block.classList.remove("hide-blocks");
       block.classList.add("show-blocks");
-      console.log(arr[idx]);
     }, 275 * (idx + 1));
   });
 });

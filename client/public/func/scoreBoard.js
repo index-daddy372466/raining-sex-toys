@@ -5,7 +5,6 @@ export default async function scoreBoard(board) {
   let arr = [...board.children];
   let id = token.identity;
   console.log(id)
-  console.log(typeof(id))
   // fetch scores by user id
   // console.log(board)
   if (board.children.length > 2) {
@@ -35,5 +34,4 @@ export default async function scoreBoard(board) {
         }
       });
   }
-  console.log(token)
 }

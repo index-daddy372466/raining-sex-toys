@@ -1,9 +1,11 @@
 const pool = require("./db.js").pool;
 class QueryCommand {
   //constructor
-  constructor(framework, id, email) {
+  constructor(framework, id, email, score) {
     this.framework = framework;
     this.id = id;
+    // this.email = email;
+    this.score = score;
   }
 
   async getUserById() {
@@ -28,10 +30,13 @@ class QueryCommand {
   }
   async postScore() {
     if (this.framework == "psql") {
+      console.log('postScore command')
+      console.log(this.best)
+      console.log(this.score)
       // method
       let updated = await pool.query(
-        `insert into scores(best,average,u_id) values(0,0,$1)`,
-        [this.id]
+        `insert into scores(best,average,u_id) values($1,0,$2)`,
+        [this.score, this.id]
       );
       try {
         return !updated
@@ -46,9 +51,10 @@ class QueryCommand {
   }
   async getScoresByUserId() {
     if (this.framework == "psql") {
-      let found = await pool.query(`select * from scores where u_id=$1 order by best desc`, [
-        this.id,
-      ]);
+      let found = await pool.query(
+        `select * from scores where u_id=$1 order by best desc`,
+        [this.id]
+      );
       return !found ? console.log("psql - no scores found") : found.rows;
     } else {
       throw new Error("No framework detected");
