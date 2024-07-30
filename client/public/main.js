@@ -59,7 +59,8 @@ startGame(
   posi,
   readySetGo,
   playGame,
-  level_element.textContent
+  level_element.textContent,
+  scoreboard
 );
 
 scoreBoard(scoreboard);

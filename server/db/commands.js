@@ -30,9 +30,6 @@ class QueryCommand {
   }
   async postScore() {
     if (this.framework == "psql") {
-      console.log('postScore command')
-      console.log(this.best)
-      console.log(this.score)
       // method
       let updated = await pool.query(
         `insert into scores(best,average,u_id) values($1,0,$2)`,

@@ -1,6 +1,10 @@
 import getWaves from "./getWaves.js";
 import levelUp from "./levelUp.js";
 import postFetch from "./postFetch.js";
+// define token
+const token = await fetch(document.location.origin + "/game/token")
+.then((r) => r.json())
+.then((d) => d.token);
 let board = document.querySelectorAll(".scoreboard-list-item");
 let nav = document.getElementById("nav-container");
 
@@ -138,29 +142,50 @@ export default function playGame(arr, posi, btn, ship) {
       let current = [...board].filter((x) =>
         /current/g.test(x.children[0].textContent)
       );
+      let avg = [...board].filter((x) =>
+        /average/g.test(x.children[0].textContent)
+      );
 
       setTimeout(() => {
         warning.classList.add("appear");
         warning.classList.remove("disappear");
       }, 750);
+
+      
       let bestScore = +[...board][0].children[1].textContent;
       let currScore = +current[0].children[1].textContent;
-      console.log(currScore);
-      console.log(bestScore)
+      let avgScore = +avg[0].children[1].textContent;
+      let sumScore = await fetch("/read/psql/review/scores/" + id).then(r=>r.json()).then(d=>{
+        let sum = [...d.data].reduce((a,b)=>a.score+b.score)
+        return sum
+      })
+      console.log(sumScore)
+
+      
+      
+
       if (currScore > bestScore) {
         [...board][0].children[1].textContent = currScore
-        const token = await fetch(document.location.origin + "/game/token")
-          .then((r) => r.json())
-          .then((d) => d.token);
+         
         let id = token.identity;
         let bestScoreUrl = document.location.origin + "/update/score/best/" + id;
-        postFetch(bestScoreUrl, { score: currScore })
+        postFetch(bestScoreUrl, { best: currScore, score: currScore })
+          .then((r) => r.json())
+          .then((d) => {
+            return d.score
+          });
+      }
+      else{
+        let id = token.identity;
+        let bestScoreUrl = document.location.origin + "/update/score/" + id;
+        postFetch(bestScoreUrl, { best: bestScore, score: currScore })
           .then((r) => r.json())
           .then((d) => {
             return d.score
           });
       }
       current[0].children[1].textContent = 0;
+
     },
   };
 

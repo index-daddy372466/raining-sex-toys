@@ -1,5 +1,5 @@
 import levelUp from "./levelUp.js";
-let nav = document.getElementById('nav-container')
+let nav = document.getElementById("nav-container");
 export default function startGame(
   btn,
   ship,
@@ -8,15 +8,21 @@ export default function startGame(
   readySetGo,
   playGame,
   level,
-
+  board
 ) {
   // prepare style for start button once clickes
   const btn_clicked = `background:#333;color:rgb(42, 170, 138);border:none;`;
   // click button to start game
   btn.onclick = async (e) => {
+    let arr = [...board.children];
+    let attempts = arr.filter((x) =>
+      /Attempts/gi.test(x.children[0].textContent)
+    );
+    attempts[0].children[1].textContent =
+      +attempts[0].children[1].textContent + 1;
     // hide navigation
-    nav.style.display = 'none'
-    console.log(nav)
+    nav.style.display = "none";
+    console.log(nav);
     // no pointer events
     e.target.classList.add("no-pointer");
 

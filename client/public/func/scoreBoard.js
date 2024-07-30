@@ -4,7 +4,6 @@ export default async function scoreBoard(board) {
   if (!board || (board && board.length < 2)) return null;
   let arr = [...board.children];
   let id = token.identity;
-  console.log(id)
   // fetch scores by user id
   // console.log(board)
   if (board.children.length > 2) {
@@ -14,6 +13,7 @@ export default async function scoreBoard(board) {
         // console.log(data)
         let scores = data.data[0];
         let attemptData = data.attempts;
+        console.log(data)
 
         // fetch top score
         if (arr[0]) {
