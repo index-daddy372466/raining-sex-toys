@@ -13,7 +13,7 @@ export default async function scoreBoard(board) {
         // console.log(data)
         let scores = data.data[0];
         let attemptData = data.attempts;
-        console.log(data)
+        // console.log(data)
 
         // fetch top score
         if (arr[0]) {

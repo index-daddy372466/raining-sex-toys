@@ -1,10 +1,7 @@
 import getWaves from "./getWaves.js";
 import levelUp from "./levelUp.js";
 import postFetch from "./postFetch.js";
-// define token
-const token = await fetch(document.location.origin + "/game/token")
-.then((r) => r.json())
-.then((d) => d.token);
+
 let board = document.querySelectorAll(".scoreboard-list-item");
 let nav = document.getElementById("nav-container");
 
@@ -71,7 +68,7 @@ export default function playGame(arr, posi, btn, ship) {
   // dildo manager
   const manageDildo = {
     moveImg: (images) => {
-      console.log(current_speed);
+      // console.log(current_speed);
       const warning_boundary = warning.getBoundingClientRect().y;
       images.forEach((pic, index) => {
         let c = pic.getBoundingClientRect().y;
@@ -88,7 +85,7 @@ export default function playGame(arr, posi, btn, ship) {
       for (let i = 0; i < images.length; i++) {
         images[i].onclick = (e) => {
           copy_wave -= 1;
-          // console.log(copy_wave);
+          // // console.log(copy_wave);
           e.target.classList.add("shoot-load");
           if ([...board].length > 0) {
             let current = [...board].filter((x) =>
@@ -140,10 +137,13 @@ export default function playGame(arr, posi, btn, ship) {
       document.getElementById("level").textContent = 0;
 
       let current = [...board].filter((x) =>
-        /current/g.test(x.children[0].textContent)
+        /current/gi.test(x.children[0].textContent)
+      );
+      let attempts = [...board].filter((x) =>
+        /attempts/gi.test(x.children[0].textContent)
       );
       let avg = [...board].filter((x) =>
-        /average/g.test(x.children[0].textContent)
+        /average/gi.test(x.children[0].textContent)
       );
 
       setTimeout(() => {
@@ -151,41 +151,44 @@ export default function playGame(arr, posi, btn, ship) {
         warning.classList.remove("disappear");
       }, 750);
 
-      
+      // define token
+      const token = await fetch(document.location.origin + "/game/token")
+        .then((r) => r.json())
+        .then((d) => d.token);
+      let id = token.identity;
       let bestScore = +[...board][0].children[1].textContent;
       let currScore = +current[0].children[1].textContent;
-      let avgScore = +avg[0].children[1].textContent;
-      let sumScore = await fetch("/read/psql/review/scores/" + id).then(r=>r.json()).then(d=>{
-        let sum = [...d.data].reduce((a,b)=>a.score+b.score)
-        return sum
-      })
-      console.log(sumScore)
-
-      
-      
+      let avgCurr = await fetch("/read/psql/review/scores/" + id)
+        .then((r) => r.json())
+        .then((d) => {
+          let nums = [...d.data].map((n) => +n.score),
+            sum = nums.reduce((a, b) => a + b) + currScore,
+            result = Math.round(sum / (d.attempts + 1));
+          // // console.log(result);
+          return result;
+        });
+      avg[0].children[1].textContent = avgCurr;
 
       if (currScore > bestScore) {
-        [...board][0].children[1].textContent = currScore
-         
-        let id = token.identity;
-        let bestScoreUrl = document.location.origin + "/update/score/best/" + id;
+        [...board][0].children[1].textContent = currScore;
+
+        let bestScoreUrl =
+          document.location.origin + "/update/score/best/" + id;
         postFetch(bestScoreUrl, { best: currScore, score: currScore })
           .then((r) => r.json())
           .then((d) => {
-            return d.score
+            return d.score;
           });
-      }
-      else{
+      } else {
         let id = token.identity;
         let bestScoreUrl = document.location.origin + "/update/score/" + id;
         postFetch(bestScoreUrl, { best: bestScore, score: currScore })
           .then((r) => r.json())
           .then((d) => {
-            return d.score
+            return d.score;
           });
       }
       current[0].children[1].textContent = 0;
-
     },
   };
 
