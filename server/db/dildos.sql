@@ -28,7 +28,8 @@ CREATE TABLE public.scores (
     score_id integer NOT NULL,
     best integer NOT NULL,
     average integer NOT NULL,
-    u_id integer NOT NULL
+    u_id integer NOT NULL,
+    score integer NOT NULL
 );
 
 
@@ -110,7 +111,7 @@ ALTER TABLE ONLY public.users ALTER COLUMN user_id SET DEFAULT nextval('public.u
 -- Data for Name: scores; Type: TABLE DATA; Schema: public; Owner: kylestech95
 --
 
-COPY public.scores (score_id, best, average, u_id) FROM stdin;
+COPY public.scores (score_id, best, average, u_id, score) FROM stdin;
 \.
 
 
@@ -119,7 +120,6 @@ COPY public.scores (score_id, best, average, u_id) FROM stdin;
 --
 
 COPY public.users (user_id, display_name, email, password) FROM stdin;
-1	la	la@la.com	$2b$11$tb98Y.pJniFHfOJa6vA0z.EQkC3ZZTW4MQhd9U29L4I4bl6qCO.46
 \.
 
 
@@ -134,7 +134,7 @@ SELECT pg_catalog.setval('public.scores_score_id_seq', 1, false);
 -- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kylestech95
 --
 
-SELECT pg_catalog.setval('public.users_user_id_seq', 1, true);
+SELECT pg_catalog.setval('public.users_user_id_seq', 1, false);
 
 
 --

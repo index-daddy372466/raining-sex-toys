@@ -21,25 +21,6 @@ class GetUsers {
     }
   }
 }
-// get scores
-class GetScores {
-  constructor(framework) {
-    this.framework = framework;
-  }
-
-  async executeQuery() {
-    if (this.framework == "psql") {
-      try {
-        let scores = await pool.query("select * from scores order by u_id asc");
-        return !scores.rows ? new Error("wrong input") : scores.rows;
-      } catch (err) {
-        throw err;
-      }
-    } else {
-      throw new Error("No framework detected");
-    }
-  }
-}
 // get score by user ID
 class GetUserById {
   //constructor
@@ -54,25 +35,6 @@ class GetUserById {
         this.id,
       ]);
       return !found ? console.log("psql - no users found") : found.rows;
-    } else {
-      throw new Error("No framework detected");
-    }
-  }
-}
-// get user by ID
-class GetScoresByUserId {
-  //constructor
-  constructor(framework, id) {
-    this.framework = framework;
-    this.id = id;
-  }
-  async executeQuery() {
-    if (this.framework == "psql") {
-      let found = await pool.query(
-        `select * from scores where u_id=$1 order by score desc`,
-        [this.id]
-      );
-      return !found ? console.log("psql - no scores found") : found.rows;
     } else {
       throw new Error("No framework detected");
     }
@@ -96,6 +58,45 @@ class GetUserByEmail {
     }
   }
 }
+
+// get scores
+class GetScores {
+  constructor(framework) {
+    this.framework = framework;
+  }
+
+  async executeQuery() {
+    if (this.framework == "psql") {
+      try {
+        let scores = await pool.query("select * from scores order by u_id asc");
+        return !scores.rows ? new Error("wrong input") : scores.rows;
+      } catch (err) {
+        throw err;
+      }
+    } else {
+      throw new Error("No framework detected");
+    }
+  }
+}
+// get scores by u_ID
+class GetScoresByUserId {
+  //constructor
+  constructor(framework, id) {
+    this.framework = framework;
+    this.id = id;
+  }
+  async executeQuery() {
+    if (this.framework == "psql") {
+      let found = await pool.query(
+        `select * from scores where u_id=$1 order by score desc`,
+        [this.id]
+      );
+      return !found ? console.log("psql - no scores found") : found.rows;
+    } else {
+      throw new Error("No framework detected");
+    }
+  }
+}
 // update scoreboard by user ID
 class UpdateScoreByUserId {
   constructor(framework, best, score, id) {
@@ -112,9 +113,10 @@ class UpdateScoreByUserId {
       try {
         let average = await pool.query(
           "select (cast(sum(score) + $1 as integer) / (count(score)+1)) as avg from scores where u_id=$2",
-          [this.score,this.id]
+          [this.score, this.id]
         );
-        let avg = average.rows[0].avg == null ? this.score : +average.rows[0].avg;
+        let avg =
+          average.rows[0].avg == null ? this.score : +average.rows[0].avg;
         let updateScore = await pool.query(
           `insert into scores(best,average,u_id,score) values($1,$2,$3,$4)`,
           [this.best, avg, this.id, this.score]
@@ -130,8 +132,81 @@ class UpdateScoreByUserId {
     }
   }
 }
+// get scores within a certain range
+class GetScoresSpectrum {
+  constructor(framework, id, from, to) {
+    this.framework = framework;
+    this.id = id;
+    this.from = from;
+    this.to = to;
+  }
+
+  async executeQuery() {
+    if (this.framework == "psql") {
+      try {
+        let scores = await pool.query(
+          "select * from scores where u_id=$1 and score <= $2 and score >= $3",
+          [this.id, this.to, this.from]
+        );
+        return !scores.rows ? new Error("wrong input") : scores.rows;
+      } catch (err) {
+        throw err;
+      }
+    } else {
+      throw new Error("No framework detected");
+    }
+  }
+}
+// get scores within a certain range
+class GetBestScore {
+  constructor(framework, id) {
+    this.framework = framework;
+    this.id = id;
+  }
+
+  async executeQuery() {
+    if (this.framework == "psql") {
+      try {
+        let scores = await pool.query(
+          "select * from scores where u_id=$1 order by score desc",
+          [this.id]
+        );
+        return !scores.rows ? new Error("wrong input") : scores.rows[0];
+      } catch (err) {
+        throw err;
+      }
+    } else {
+      throw new Error("No framework detected");
+    }
+  }
+}
+class GetWorstScore {
+  constructor(framework, id) {
+    this.framework = framework;
+    this.id = id;
+  }
+  
+  async executeQuery() {
+    if (this.framework == "psql") {
+      try {
+        let scores = await pool.query(
+          "select * from scores where u_id=$1 order by score asc",
+          [this.id]
+        );
+        return !scores.rows ? new Error("wrong input") : scores.rows.length > 1 ? scores.rows[0] : scores.rows.length + ' score documented (best)';
+      } catch (err) {
+        throw err;
+      }
+    } else {
+      throw new Error("No framework detected");
+    }
+  }
+}
 
 module.exports = {
+  GetWorstScore,
+  GetBestScore,
+  GetScoresSpectrum,
   GetUsers,
   GetScores,
   GetScoresByUserId,

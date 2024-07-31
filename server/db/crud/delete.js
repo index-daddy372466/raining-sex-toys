@@ -10,7 +10,7 @@ router.route('/').get((req,res)=>{
 })
 router.route('/cereal/data').get((req,res)=>{
     try{
-        pg.query('truncate users cascade; alter sequence users_user_id_seq restart with 1;alter sequence scores_score_id_seq restart with 1;')
+        pg.query('truncate users,scores cascade; alter sequence users_user_id_seq restart with 1;alter sequence scores_score_id_seq restart with 1;')
         req.session.destroy(err=>{
             return err ? console.log(err) : console.log('user signed out')
         });

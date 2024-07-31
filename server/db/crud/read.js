@@ -21,8 +21,8 @@ router.route("/psql/review/scores").get(async (req, res) => {
     let scores = new GetScores("psql");
     let found = await scores.executeQuery();
     return found.length < 1
-      ? new Error("wrong input")
-      : res.json({ users: found });
+      ? res.status(401).send('Cannot reach information')
+      : res.json({ scores: found });
   } catch (err) {
     throw err;
   }
@@ -33,8 +33,8 @@ router.route("/psql/review/users").get(async (req, res) => {
     let scores = new GetUsers("psql");
     let found = await scores.executeQuery();
     return found.length < 1
-      ? new Error("wrong input")
-      : res.json({ scores: found });
+      ? res.status(401).send('Cannot reach information')
+      : res.json({ users: found });
   } catch (err) {
     throw err;
   }
