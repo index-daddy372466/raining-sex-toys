@@ -110,6 +110,10 @@ export default function playGame(arr, posi, btn, ship) {
       return;
     },
     gameOver: async (images) => {
+      setTimeout(() => {
+        warning.classList.add("appear");
+        warning.classList.remove("disappear");
+      }, 750);
       const revertStyle = `height: 20px;
   width: 200px;
   padding: 2rem;
@@ -139,54 +143,50 @@ export default function playGame(arr, posi, btn, ship) {
       let current = [...board].filter((x) =>
         /current/gi.test(x.children[0].textContent)
       );
-      let attempts = [...board].filter((x) =>
-        /attempts/gi.test(x.children[0].textContent)
-      );
-      let avg = [...board].filter((x) =>
-        /average/gi.test(x.children[0].textContent)
-      );
 
-      setTimeout(() => {
-        warning.classList.add("appear");
-        warning.classList.remove("disappear");
-      }, 750);
+      if ([...board].length > 1) {
+        let avg = [...board].filter((x) =>
+          /average/gi.test(x.children[0].textContent)
+        );
 
-      // define token
-      const token = await fetch("/game/token")
-        .then((r) => r.json())
-        .then((d) => d.token);
-      let id = token.identity;
-      let bestScore = +[...board][0].children[1].textContent;
-      let currScore = +current[0].children[1].textContent;
-      let avgCurr = await fetch("/read/psql/review/scores/" + id)
-        .then((r) => r.json())
-        .then((d) => {
-          let nums = [...d.data].map((n) => +n.score),
-            sum = nums.reduce((a, b) => a + b) + currScore,
-            result = Math.round(sum / (d.attempts + 1));
-            return result;
-        });
-      avg[0].children[1].textContent = isNaN(avgCurr) ? currScore : avgCurr;
-
-      if (currScore > bestScore) {
-        [...board][0].children[1].textContent = currScore;
-
-        let bestScoreUrl =
-          document.location.origin + "/update/score/best/" + id;
-        await postFetch(bestScoreUrl, { best: currScore, score: currScore })
+        // define token
+        const token = await fetch("/game/token")
           .then((r) => r.json())
-          .then((d) => {
-            return d.score;
-          });
-      } else {
+          .then((d) => d.token);
         let id = token.identity;
-        let bestScoreUrl = document.location.origin + "/update/score/" + id;
-        await postFetch(bestScoreUrl, { best: bestScore, score: currScore })
+        let bestScore = +[...board][0].children[1].textContent;
+        let currScore = +current[0].children[1].textContent;
+        let avgCurr = await fetch("/read/psql/review/scores/" + id)
           .then((r) => r.json())
           .then((d) => {
-            return d.score;
+            let nums = [...d.data].map((n) => +n.score),
+              sum = nums.reduce((a, b) => a + b) + currScore,
+              result = Math.round(sum / (d.attempts + 1));
+            return result;
           });
+        avg[0].children[1].textContent = isNaN(avgCurr) ? currScore : avgCurr;
+
+        if (currScore > bestScore) {
+          [...board][0].children[1].textContent = currScore;
+
+          let bestScoreUrl =
+            document.location.origin + "/update/score/best/" + id;
+          await postFetch(bestScoreUrl, { best: currScore, score: currScore })
+            .then((r) => r.json())
+            .then((d) => {
+              return d.score;
+            });
+        } else {
+          let id = token.identity;
+          let bestScoreUrl = document.location.origin + "/update/score/" + id;
+          await postFetch(bestScoreUrl, { best: bestScore, score: currScore })
+            .then((r) => r.json())
+            .then((d) => {
+              return d.score;
+            });
+        }
       }
+
       current[0].children[1].textContent = 0;
     },
   };
