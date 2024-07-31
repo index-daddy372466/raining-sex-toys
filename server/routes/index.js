@@ -6,17 +6,11 @@
 
 const express = require("express");
 const router = express.Router();
-const { readdirSync, readFileSync } = require("fs");
-const path = require("path");
-const svg = [];
 const passport = require('passport')
 const cookieParser  = require('cookie-parser')
 router.use(cookieParser())
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
-
-
-
 router.route("/login").post(
     passport.authenticate("local", {
       successRedirect: "/game",

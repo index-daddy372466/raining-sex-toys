@@ -6,18 +6,19 @@ const svg = [];
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
-router.route("/token").get((req, res) => {
-  if (req.isAuthenticated()) {
-    res.json({ token: req.session });
-  } else {
-    res.json({ token: "no token (not authenticated)" });
-  }
-});
+
 router.route("/").get((req, res) => {
   if (req.isAuthenticated()) {
     req.session.identity = req.user.user_id;
   }
-  console.log(req.session);
+  router.route("/token").get((req, res) => {
+    if (req.isAuthenticated()) {
+      res.json({ token: req.session });
+    } else {
+      res.json({ token: "no token (not authenticated)" });
+    }
+  });
+  // console.log(req.session);
   res.render("index", {
     isAuthenticated: req.isAuthenticated(),
   });
