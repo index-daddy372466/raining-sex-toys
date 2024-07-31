@@ -4,6 +4,12 @@ const { readdirSync, readFileSync } = require("fs");
 const path = require("path");
 const svg = [];
 
+
+
+router.use(function(req, res, next) {
+  res.setHeader("Content-Security-Policy","img-src 'self' blob: data:");
+  return next();
+});
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 

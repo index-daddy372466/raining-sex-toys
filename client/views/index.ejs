@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="img-src 'self' blob: data:;"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- static assets utilized from static mid -->
     <link rel="stylesheet" href="/game.css" />
-    <link rel="stylesheet" href="/index.css">
+    <link rel="stylesheet" href="/index.css" />
     <title>Raining Dildos App</title>
   </head>
   <body>
@@ -39,11 +43,8 @@
     <button id="start-btn" class="appear">Start</button>
     <!-- warning -->
     <hr id="warning" />
-    <% if(!isAuthenticated){%>
-      <%- include('partials/unsecured/scoreboard.ejs') %>
-      <% } else { %>
-      <%- include('partials/secured/scoreboard.ejs') %>
-          <% } %>
+    <% if(!isAuthenticated){%> <%- include('partials/unsecured/scoreboard.ejs')
+    %> <% } else { %> <%- include('partials/secured/scoreboard.ejs') %> <% } %>
   </body>
   <script type="module" src="/main.js"></script>
 </html>
