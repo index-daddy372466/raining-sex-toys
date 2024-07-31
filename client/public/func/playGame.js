@@ -169,8 +169,8 @@ export default function playGame(arr, posi, btn, ship) {
         if (currScore > bestScore) {
           [...board][0].children[1].textContent = currScore;
 
-          let bestScoreUrl =
-            document.location.origin + "/update/score/best/" + id;
+          let bestScoreUrl = document.location.origin + "/update/score/" + id;
+          // best score is current score
           await postFetch(bestScoreUrl, { best: currScore, score: currScore })
             .then((r) => r.json())
             .then((d) => {
@@ -178,6 +178,7 @@ export default function playGame(arr, posi, btn, ship) {
             });
         } else {
           let id = token.identity;
+          // best score is still top Score
           let bestScoreUrl = document.location.origin + "/update/score/" + id;
           await postFetch(bestScoreUrl, { best: bestScore, score: currScore })
             .then((r) => r.json())

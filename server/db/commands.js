@@ -1,14 +1,54 @@
 const pool = require("./db.js").pool;
-class QueryCommand {
-  //constructor
-  constructor(framework, id, email, score) {
+
+// get scores
+class GetUsers {
+  constructor(framework) {
     this.framework = framework;
-    this.id = id;
-    // this.email = email;
-    this.score = score;
   }
 
-  async getUserById() {
+  async executeQuery() {
+    if (this.framework == "psql") {
+      try {
+        let users = await pool.query(
+          "select * from users order by user_id asc"
+        );
+        return !users.rows ? new Error("wrong input") : users.rows;
+      } catch (err) {
+        throw err;
+      }
+    } else {
+      throw new Error("No framework detected");
+    }
+  }
+}
+// get scores
+class GetScores {
+  constructor(framework) {
+    this.framework = framework;
+  }
+
+  async executeQuery() {
+    if (this.framework == "psql") {
+      try {
+        let scores = await pool.query("select * from scores order by u_id asc");
+        return !scores.rows ? new Error("wrong input") : scores.rows;
+      } catch (err) {
+        throw err;
+      }
+    } else {
+      throw new Error("No framework detected");
+    }
+  }
+}
+// get score by user ID
+class GetUserById {
+  //constructor
+  constructor(framework, id) {
+    this.framework = framework;
+    this.id = id;
+  }
+
+  async executeQuery() {
     if (this.framework == "psql") {
       let found = await pool.query(`select * from users where user_id=$1`, [
         this.id,
@@ -18,7 +58,34 @@ class QueryCommand {
       throw new Error("No framework detected");
     }
   }
-  async getUsersByEmail() {
+}
+// get user by ID
+class GetScoresByUserId {
+  //constructor
+  constructor(framework, id) {
+    this.framework = framework;
+    this.id = id;
+  }
+  async executeQuery() {
+    if (this.framework == "psql") {
+      let found = await pool.query(
+        `select * from scores where u_id=$1 order by score desc`,
+        [this.id]
+      );
+      return !found ? console.log("psql - no scores found") : found.rows;
+    } else {
+      throw new Error("No framework detected");
+    }
+  }
+}
+// get user by email
+class GetUserByEmail {
+  //constructor
+  constructor(framework, email) {
+    this.framework = framework;
+    this.email = email;
+  }
+  async executeQuery() {
     if (this.framework == "psql") {
       let found = await pool.query(`select * from users where email = $1`, [
         this.email,
@@ -28,35 +95,47 @@ class QueryCommand {
       throw new Error("No framework detected");
     }
   }
-  async postScore() {
+}
+// update scoreboard by user ID
+class UpdateScoreByUserId {
+  constructor(framework, best, score, id) {
+    this.framework = framework;
+    this.best = best;
+    this.score = score;
+    this.id = id;
+  }
+
+  async executeQuery() {
     if (this.framework == "psql") {
       // method
-      let updated = await pool.query(
-        `insert into scores(best,average,u_id) values($1,0,$2)`,
-        [this.score, this.id]
-      );
+
       try {
-        return !updated
-          ? console.log("psql - insert failure")
-          : console.log("insert complete");
+        let average = await pool.query(
+          "select (cast(sum(score) + $1 as integer) / (count(score)+1)) as avg from scores where u_id=$2",
+          [this.score,this.id]
+        );
+        let avg = average.rows[0].avg == null ? this.score : +average.rows[0].avg;
+        let updateScore = await pool.query(
+          `insert into scores(best,average,u_id,score) values($1,$2,$3,$4)`,
+          [this.best, avg, this.id, this.score]
+        );
+
+        if (!updateScore) console.log("error on insert");
+        return this.score;
       } catch (err) {
-        throw err;
+        if (err) console.log(err);
       }
-    } else {
-      throw new Error("No framework detected");
-    }
-  }
-  async getScoresByUserId() {
-    if (this.framework == "psql") {
-      let found = await pool.query(
-        `select * from scores where u_id=$1 order by best desc`,
-        [this.id]
-      );
-      return !found ? console.log("psql - no scores found") : found.rows;
     } else {
       throw new Error("No framework detected");
     }
   }
 }
 
-module.exports = QueryCommand;
+module.exports = {
+  GetUsers,
+  GetScores,
+  GetScoresByUserId,
+  GetUserById,
+  GetUserByEmail,
+  UpdateScoreByUserId,
+};
