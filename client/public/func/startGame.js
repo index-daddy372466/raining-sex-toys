@@ -15,14 +15,16 @@ export default function startGame(
   // click button to start game
   btn.onclick = async (e) => {
     let arr = [...board.children];
-    let attempts = arr.filter((x) =>
-      /Attempts/gi.test(x.children[0].textContent)
-    );
-    attempts[0].children[1].textContent =
-      +attempts[0].children[1].textContent + 1;
+
+    if (arr.length > 1) {
+      let attempts = arr.filter((x) =>
+        /Attempts/gi.test(x.children[0].textContent)
+      );
+      attempts[0].children[1].textContent =
+        +attempts[0].children[1].textContent + 1;
+    }
     // hide navigation
     nav.style.display = "none";
-    console.log(nav);
     // no pointer events
     e.target.classList.add("no-pointer");
 

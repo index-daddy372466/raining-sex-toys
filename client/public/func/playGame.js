@@ -152,7 +152,7 @@ export default function playGame(arr, posi, btn, ship) {
       }, 750);
 
       // define token
-      const token = await fetch(document.location.origin + "/game/token")
+      const token = await fetch("/game/token")
         .then((r) => r.json())
         .then((d) => d.token);
       let id = token.identity;
@@ -164,17 +164,16 @@ export default function playGame(arr, posi, btn, ship) {
           let nums = [...d.data].map((n) => +n.score),
             sum = nums.reduce((a, b) => a + b) + currScore,
             result = Math.round(sum / (d.attempts + 1));
-          // // console.log(result);
-          return result;
+            return result;
         });
-      avg[0].children[1].textContent = avgCurr;
+      avg[0].children[1].textContent = isNaN(avgCurr) ? currScore : avgCurr;
 
       if (currScore > bestScore) {
         [...board][0].children[1].textContent = currScore;
 
         let bestScoreUrl =
           document.location.origin + "/update/score/best/" + id;
-        postFetch(bestScoreUrl, { best: currScore, score: currScore })
+        await postFetch(bestScoreUrl, { best: currScore, score: currScore })
           .then((r) => r.json())
           .then((d) => {
             return d.score;
@@ -182,7 +181,7 @@ export default function playGame(arr, posi, btn, ship) {
       } else {
         let id = token.identity;
         let bestScoreUrl = document.location.origin + "/update/score/" + id;
-        postFetch(bestScoreUrl, { best: bestScore, score: currScore })
+        await postFetch(bestScoreUrl, { best: bestScore, score: currScore })
           .then((r) => r.json())
           .then((d) => {
             return d.score;

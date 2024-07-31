@@ -10,41 +10,59 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
 // read user/scores data - psql
-router.route("/psql/review/:data").get(async (req, res) => {
+router.route("/psql/review/scores").get(async (req, res) => {
   const { data } = req.params;
-  if (/scores/i.test(data)) {
+
+  try {
     let scores = await pg.query("select * from scores");
     return !scores.rows
       ? new Error("wrong input")
       : res.json({ scores: scores.rows });
-  } else if (/users/i.test(data)) {
+  } catch (err) {
+    throw err;
+  }
+});
+
+router.route("/psql/review/users").get(async (req, res) => {
+  const { data } = req.params;
+
+  try {
     let users = await pg.query("select * from users");
     return !users.rows
       ? new Error("wrong input")
       : res.json({ users: users.rows });
-  } else {
-    res.send("not recognized");
+  } catch (err) {
+    throw err;
   }
 });
 
 // get user by id - psql
-router.route("/psql/review/:data/:id").get(async (req, res) => {
-  const { data, id } = req.params;
+router.route("/psql/review/scores/:id").get(async (req, res) => {
+  const { id } = req.params;
 
-  if (/scores/i.test(data)) {
+  try {
     let getScores = new QueryCommand("psql", id);
     let found = await getScores.getScoresByUserId();
     return found.length < 1
-      ? res.send("no scores found")
+      ? res.json({data:"no scores found"})
       : res.json({ data: found, attempts: found.length });
-  } else if (/users/i.test(data)) {
+  } catch (err) {
+    throw err;
+  }
+});
+
+// get user by id - psql
+router.route("/psql/review/users/:id").get(async (req, res) => {
+  const { id } = req.params;
+
+  try {
     let getUser = new QueryCommand("psql", id);
     let found = await getUser.getUserById();
     return found.length < 1
       ? res.send("no users found")
       : res.json({ data: found });
-  } else {
-    res.send("not recognized");
+  } catch (err) {
+    throw err;
   }
 });
 

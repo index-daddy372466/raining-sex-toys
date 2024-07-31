@@ -8,7 +8,6 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 router.route("/token").get((req, res) => {
   if (req.isAuthenticated()) {
-    console.log(req.session);
     res.json({ token: req.session });
   } else {
     res.json({ token: "no token (not authenticated)" });
@@ -48,7 +47,6 @@ router.route("/svgs").get((req, res) => {
 // get wave
 router.route("/level/:wave").post((req, res) => {
   const { wave } = req.body;
-  console.log(wave);
   if (typeof wave == "number") {
     res.json({ wave: wave });
   } else {
