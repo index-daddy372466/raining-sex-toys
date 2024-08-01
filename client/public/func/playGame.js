@@ -57,6 +57,15 @@ export default function playGame(arr, posi, btn, ship) {
         img.style.width = posi[0].x + "px";
         img.style.height = posi[0].x + "px";
       });
+    },
+    resetHoles = (container) => {
+      let children = [...container.children];
+      children.forEach((child) => {
+        if (!child.classList.contains("holes")) {
+          child.parentElement.removeChild(child);
+        }
+      });
+      return;
     };
 
   let current_speed = 5,
@@ -110,6 +119,10 @@ export default function playGame(arr, posi, btn, ship) {
       return;
     },
     gameOver: async (images) => {
+      let container = document.getElementById("holes-container");
+      // reset holes back to 3
+      resetHoles(container);
+
       setTimeout(() => {
         warning.classList.add("appear");
         warning.classList.remove("disappear");

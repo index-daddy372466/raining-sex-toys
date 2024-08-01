@@ -11,7 +11,7 @@ const routingMiddleware = require("./routingMiddleware.js");
 const initializePassport = require("./passport.config.js");
 const MemoryStore = require("memorystore")(session);
 const nocache = require("nocache");
-
+  
 initializePassport(passport);
 
 app.use(express.static("client/public"));
