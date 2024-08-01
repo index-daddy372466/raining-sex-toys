@@ -8,6 +8,8 @@ const express = require("express");
 const router = express.Router();
 const passport = require('passport')
 const cookieParser  = require('cookie-parser')
+const { checkNotAuthenticated } = require('../lib/auth.config');
+
 router.use(cookieParser())
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
@@ -23,7 +25,6 @@ router.route("/login").post(
   })
   // home
   router.route("/home").get( (req, res) => {
-    if(req.isAuthenticated())console.log('yes queen')
     res.render("home.ejs",{
       isAuthenticated:req.isAuthenticated(),
     });
@@ -37,15 +38,4 @@ router.route("/login").post(
     res.render("login.ejs");
   });
   
-  
-  function checkNotAuthenticated(req, res, next) {
-    if (!req.isAuthenticated()) {
-      console.log("you are not authenticated!!!");
-      next();
-    } else {
-      console.log("you are authenticated");
-      res.redirect("/game");
-    }
-  }
-
   module.exports = router;

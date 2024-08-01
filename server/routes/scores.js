@@ -10,13 +10,14 @@ const {
 const { checkAuthenticated } = require("../lib/auth.config.js");
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
+router.use(checkAuthenticated)
 
-router.route("/").get(checkAuthenticated, (req, res) => {
+router.route("/").get( (req, res) => {
   // render frontend ejs
   res.render("scores.ejs");
 });
 
-router.route("/all").get(checkAuthenticated, async (req, res) => {
+router.route("/all").get( async (req, res) => {
   try {
     const getScores = new GetScores("psql");
     const found = await getScores.executeQuery();
@@ -27,7 +28,7 @@ router.route("/all").get(checkAuthenticated, async (req, res) => {
     throw err;
   }
 });
-router.route("/users/:id").get(checkAuthenticated, async (req, res) => {
+router.route("/users/:id").get(async (req, res) => {
   const { id } = req.params;
   try {
     const getScores = new GetScoresByUserId("psql", id);
@@ -41,7 +42,7 @@ router.route("/users/:id").get(checkAuthenticated, async (req, res) => {
 });
 router
   .route("/spectrum/:id/query")
-  .get(checkAuthenticated, async (req, res) => {
+  .get( async (req, res) => {
     const { id } = req.params;
     const { from, to } = req.query;
     try {
@@ -57,7 +58,7 @@ router
   });
 router
   .route("/spectrum/:id/:condition")
-  .get(checkAuthenticated, async (req, res) => {
+  .get( async (req, res) => {
     const { id, condition } = req.params;
     try {
       if(/best/i.test(condition)){
