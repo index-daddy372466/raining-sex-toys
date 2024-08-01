@@ -1,13 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/index.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/index.css" />
     <title>Scores</title>
-</head>
-<body>
-    <h1>Hello Scores!</h1>
-</body>
-<script type="module" src="/score.js"></script>
+  </head>
+  <body>
+    <div>
+      <h1>All Scores</h1>
+      <ul id="scores-container" class="scores-list-container">
+        <li class="score-list-item">
+          <div id="scorecard" class="score-card card-score card">
+            <h4 class="score-item score-input" id="score">20</h4>
+            <h4 class="score-item score-input" id="best">15</h4>
+            <h4 class="score-item score-input" id="average">13</h4>
+          </div>
+        </li>
+        <li class="score-list-item">
+          <div id="scorecard" class="score-card card-score card">
+            <h4 class="score-item score-input" id="score">8</h4>
+            <h4 class="score-item score-input" id="best">9</h4>
+            <h4 class="score-item score-input" id="average">6</h4>
+          </div>
+        </li>
+        <li class="score-list-item">
+          <div id="scorecard" class="score-card card-score card">
+            <h4 class="score-item score-input" id="score">55</h4>
+            <h4 class="score-item score-input" id="best">34</h4>
+            <h4 class="score-item score-input" id="average">3</h4>
+          </div>
+        </li>
+        <li class="score-list-item">
+          <div id="scorecard" class="score-card card-score card">
+            <h4 class="score-item score-input" id="score">33</h4>
+            <h4 class="score-item score-input" id="best">9</h4>
+            <h4 class="score-item score-input" id="average">8</h4>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <aside class="sidebar side-bar bar-side">
+      <div class="best-worst-container">
+        <div class="best-worst-label-container">
+          <h3 class="best-worst-label">Best Score</h3>
+          <div class="best-worst-score-container">
+            <h4 class="best-worst-score" id="best-score">22</h4>
+          </div>
+        </div>
+      </div>
+      <div class="best-worst-container">
+        <div class="best-worst-label-container">
+          <h3 class="best-worst-label">Worst Score</h3>
+          <div class="best-worst-score-container">
+            <h4 class="best-worst-score" id="worst-score">34</h4>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </body>
+  <script type="module" src="/score.js"></script>
 </html>

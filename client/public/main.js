@@ -18,8 +18,6 @@ window.addEventListener("load", (e) => {
     }, 275 * (idx + 1));
   });
 });
-const logout = document.querySelectorAll(".link-link");
-// console.log(score_items);
 const spaceship = document.getElementById("spaceship-container"),
   start = document.getElementById("start-btn"),
   holes = document.querySelectorAll(".list-item>div"),

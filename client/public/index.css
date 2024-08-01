@@ -59,3 +59,18 @@ body {
   transition: 0.25s;
   cursor:pointer;
 }
+
+/* score */
+.score-list-item{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  height:100%;
+  border:2px solid red;
+}
+.score-list-item>.score-card{
+  display:flex;
+  gap:.25rem;
+
+}
