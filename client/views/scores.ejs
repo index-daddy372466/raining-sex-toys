@@ -8,39 +8,14 @@
     <title>Scores</title>
   </head>
   <body>
+    <h1>All Scores</h1>
     <%- include('partials/secured/scores/navigation.ejs') %>
-    <div>
-      <h1>All Scores</h1>
-      <ul id="scores-container" class="scores-list-container">
-        <li class="score-list-item">
-          <div id="scorecard" class="score-card card-score card">
-            <h4 class="score-item score-input" id="score">20</h4>
-            <h4 class="score-item score-input" id="best">15</h4>
-            <h4 class="score-item score-input" id="average">13</h4>
-          </div>
-        </li>
-        <li class="score-list-item">
-          <div id="scorecard" class="score-card card-score card">
-            <h4 class="score-item score-input" id="score">8</h4>
-            <h4 class="score-item score-input" id="best">9</h4>
-            <h4 class="score-item score-input" id="average">6</h4>
-          </div>
-        </li>
-        <li class="score-list-item">
-          <div id="scorecard" class="score-card card-score card">
-            <h4 class="score-item score-input" id="score">55</h4>
-            <h4 class="score-item score-input" id="best">34</h4>
-            <h4 class="score-item score-input" id="average">3</h4>
-          </div>
-        </li>
-        <li class="score-list-item">
-          <div id="scorecard" class="score-card card-score card">
-            <h4 class="score-item score-input" id="score">33</h4>
-            <h4 class="score-item score-input" id="best">9</h4>
-            <h4 class="score-item score-input" id="average">8</h4>
-          </div>
-        </li>
-      </ul>
+    <div id="container-scores-parent">
+      <div id="slider">
+        <ul id="scores-container" class="scores-list-container">
+          <!-- scorecard -->
+        </ul>
+      </div>
     </div>
     <!-- best score -->
     <aside class="sidebar side-bar bar-side">
@@ -49,7 +24,7 @@
           <h3 class="score-info-label">Best Score</h3>
         </div>
         <div class="score-info-score-container">
-          <h4 class="score-info-score" id="best-score">22</h4>
+          <h4 class="score-info-score" id="best-score"></h4>
         </div>
       </div>
       <!-- worst score -->
@@ -58,7 +33,7 @@
           <h3 class="score-info-label">Worst Score</h3>
         </div>
         <div class="score-info-score-container">
-          <h4 class="score-info-score" id="worst-score">34</h4>
+          <h4 class="score-info-score" id="worst-score"></h4>
         </div>
       </div>
       <!-- average score -->
@@ -67,7 +42,7 @@
           <h3 class="score-info-label">Average Score</h3>
         </div>
         <div class="score-info-score-container">
-          <h4 class="score-info-score" id="worst-score">34</h4>
+          <h4 class="score-info-score" id="average-score"></h4>
         </div>
       </div>
       <!-- attempts -->
@@ -76,7 +51,7 @@
           <h3 class="score-info-label">Attempts</h3>
         </div>
         <div class="score-info-score-container">
-          <h4 class="score-info-score" id="worst-score">34</h4>
+          <h4 class="score-info-score" id="attempts-score"></h4>
         </div>
       </div>
     </aside>
