@@ -26,6 +26,7 @@ body {
   background: #000;
   opacity: 0.89;
   box-shadow: 0 0.5rem 8px 0.5px rgb(224, 84, 84);
+  z-index:999;
 }
 .nav-list-container {
   height: 80px;

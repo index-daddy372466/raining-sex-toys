@@ -1,36 +1,32 @@
 /* score */
 #container-scores-parent {
-  height: 50%;
-  width: 50%;
-  border: 4px solid brown;
+  margin:5rem 0 0 0;
+  height: 100%;
+  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
   overflow: hidden;
   overflow-x: scroll;
   scroll-behavior: smooth;
   position:relative;
+  padding:0 3rem 0 0;
 }
 
-#slider{
-  width:1000px;
-  position:absolute;
-  border:6px solid yellow;
-  height:100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-left:5rem;
-}
 #scores-container {
   position:absolute;
-  width:100%;
+  width:75%;
+  max-height:500px;
+  min-height:150px;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   gap: 1rem;
-  border:2px solid cyan;
+  /* border:2px solid cyan; */
+  box-shadow:inset 0 0 10px 15px rgba(142, 141, 141, 0.708);
+  overflow:hidden;
+  overflow-y:scroll;
 }
 
 .score-list-item {
@@ -40,7 +36,7 @@
   width: 200px;
   height: 200px;
   border: 4px solid #000;
-  
+
 }
 .score-list-item > .score-card {
   display: flex;
