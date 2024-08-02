@@ -88,7 +88,7 @@ class GetScoresByUserId {
   async executeQuery() {
     if (this.framework == "psql") {
       let found = await pool.query(
-        `select * from scores where u_id=$1 order by score desc`,
+        `select * from scores where u_id=$1 order by score_id desc`,
         [this.id]
       );
       return !found ? console.log("psql - no scores found") : found.rows;
