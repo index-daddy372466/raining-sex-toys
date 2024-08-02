@@ -1,7 +1,7 @@
-import startGame from "./func/startGame.js";
-import readySetGo from "./func/readySetGo.js";
-import playGame from "./func/playGame.js";
-import scoreBoard from "./func/scoreBoard.js";
+import startGame from "../../func/startGame.js";
+import readySetGo from "../../func/readySetGo.js";
+import playGame from "../../func/playGame.js";
+import scoreBoard from "../../func/scoreBoard.js";
 
 // scoreboard tile transition on load (enter game)
 let board = document.querySelectorAll(".scoreboard-list-item");

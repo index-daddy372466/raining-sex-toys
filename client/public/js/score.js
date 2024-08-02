@@ -1,5 +1,5 @@
-import scoreData from "./func/scoreData.js";
-import genereateScoreCards from "./func/generateScoreCards.js";
+import scoreData from "../../func/scoreData.js";
+import genereateScoreCards from "../../func/generateScoreCards.js";
 // scores page - send scores data
 let scores = await scoreData();
 console.log(scores)
@@ -22,3 +22,7 @@ sidebar.forEach((bar, index) => {
   let element = document.getElementById(`${bar}-score`);
   element.textContent = userScoreData[index];
 });
+
+const filterWrapper = document.getElementById('filter-wrapper')
+const scoreContainer = document.getElementById('container-scores-parent');
+filterWrapper.style = `top:${scoreContainer.getBoundingClientRect().y-65}px`
