@@ -22,7 +22,3 @@ sidebar.forEach((bar, index) => {
   let element = document.getElementById(`${bar}-score`);
   element.textContent = userScoreData[index];
 });
-
-const filterWrapper = document.getElementById('filter-wrapper')
-const scoreContainer = document.getElementById('container-scores-parent');
-filterWrapper.style = `top:${scoreContainer.getBoundingClientRect().y-65}px`
