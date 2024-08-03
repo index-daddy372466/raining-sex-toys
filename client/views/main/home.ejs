@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/highlight.css">
     <title>Home</title>
   </head>
 
@@ -12,7 +13,12 @@
     <% if(!isAuthenticated){%> <%-
     include('../partials/unsecured/navigation.ejs') %> <% } else { %> <%-
     include('../partials/secured/navigation.ejs') %> <% } %>
-    <h1 id="home">Home</h1>
+    <h1 id="home-title" style="font-size:50px;font-family: Arial, Helvetica, sans-serif;z-index:999;text-align:center">Raining Sex Toys</h1>
+    <div id="svg-container">
+      <%- include('../../../server/icons/dildo4.svg') %>
+      <%- include('../../../server/icons/dildo9.svg') %>
+      <%- include('../../../server/icons/dildo17.svg') %>
+    </div>
     <!-- footer -->
     <% if(!isAuthenticated){%> <%-
         include('../partials/unsecured/footer.ejs') %> <% } else { %> <%-

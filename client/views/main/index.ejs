@@ -10,10 +10,12 @@
     <!-- static assets utilized from static mid -->
     <link rel="stylesheet" href="/css/game.css" />
     <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/highlight.css">
     <title>Raining Dildos App</title>
   </head>
   <body>
-    <%- include('../partials/general/navigation.ejs') %>
+    <% if(!isAuthenticated){%> <%- include('../partials/unsecured/navigation.ejs')
+    %> <% } else { %> <%- include('../partials/secured/navigation.ejs') %> <% } %>
     <!-- level indicator in background -->
     <h1 id="level" class="no-pointer"></h1>
     <!-- dildos fall from spaceship's exit holes -->
