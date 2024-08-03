@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/settings.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <title>Settings</title>
+  </head>
+  <body>
+    <% if(!isAuthenticated){%> <%-
+        include('../partials/unsecured/navigation.ejs') %> <% } else { %> <%-
+        include('../partials/secured/navigation.ejs') %> <% } %>
+    <h1>Hello <%- user %></h1>
+    <% if(!isAuthenticated){%> <%-
+        include('../partials/unsecured/footer.ejs') %> <% } else { %> <%-
+        include('../partials/secured/footer.ejs') %> <% } %>
+  </body>
+</html>
