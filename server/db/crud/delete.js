@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router();
 const override = require('method-override')
 const pg = require('../db.js').pool
+const { checkAuthenticated } = require('../../lib/auth.config.js')
 
 router.use(override('_method'))
 
@@ -26,6 +27,13 @@ router.route('/logout').delete((req,res)=>{
     });
     res.redirect('/')
 })
+router.route('/logout').get(checkAuthenticated,(req,res)=>{
+    req.session.destroy(err=>{
+        return err ? console.log(err) : console.log('user signed out')
+    });
+    res.redirect('/')
+})
+
 
 
 module.exports = router;

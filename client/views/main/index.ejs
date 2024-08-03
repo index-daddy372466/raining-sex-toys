@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/css/game.css" />
     <link rel="stylesheet" href="/css/index.css" />
     <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/footer.css">
     <title>Raining Dildos App</title>
   </head>
   <body>
@@ -47,6 +48,9 @@
     <hr id="warning" />
     <% if(!isAuthenticated){%> <%- include('../partials/unsecured/scoreboard.ejs')
     %> <% } else { %> <%- include('../partials/secured/scoreboard.ejs') %> <% } %>
+    <!-- footer -->
+    <% if(!isAuthenticated){%> <%- include('../partials/unsecured/footer.ejs')
+    %> <% } else { %> <%- include('../partials/secured/footer.ejs') %> <% } %>
   </body>
   <script type="module" src="/js//main.js"></script>
 </html>

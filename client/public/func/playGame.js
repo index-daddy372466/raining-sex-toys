@@ -4,6 +4,7 @@ import postFetch from "./postFetch.js";
 
 let board = document.querySelectorAll(".scoreboard-list-item");
 let nav = document.getElementById("nav-container");
+let footer = document.getElementById("footer-wrapper");
 
 export default function playGame(arr, posi, btn, ship) {
   const warning = document.getElementById("warning"),
@@ -140,6 +141,7 @@ export default function playGame(arr, posi, btn, ship) {
   transition: 0.25s;
   font-size: 25px;`;
       nav.style.display = "block";
+      footer.parentElement.style = "display:block";
 
       images.forEach((img) => img.classList.add("shoot-load"));
       ship.classList.remove("hi-spaceship");

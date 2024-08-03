@@ -1,5 +1,6 @@
 import levelUp from "./levelUp.js";
 let nav = document.getElementById("nav-container");
+let footer = document.getElementById("footer-wrapper")
 export default function startGame(
   btn,
   ship,
@@ -25,6 +26,7 @@ export default function startGame(
     }
     // hide navigation
     nav.style.display = "none";
+    footer.parentElement.style = "display:none";
     // no pointer events
     e.target.classList.add("no-pointer");
 

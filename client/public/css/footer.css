@@ -24,6 +24,12 @@ footer{
     bottom:0;
     left:0;
     overflow-x:hidden;
+    opacity:.85;
+    transition:.25s;
+}
+footer:hover{
+    opacity:1;
+    transition:.5s;
 }
 #footer-wrapper{
     display:flex;

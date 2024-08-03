@@ -83,9 +83,14 @@ body {
   height: 85px;
   width: 100%;
   background: #000;
-  opacity: 0.89;
+  opacity: 0.85;
   box-shadow: 0 0.5rem 8px 0.5px rgb(224, 84, 84);
   z-index:999;
+  transition:.25s;
+}
+#nav-container:hover{
+  opacity:1;
+  transition:.5s;
 }
 .nav-list-container {
   height: 80px;
@@ -120,7 +125,7 @@ body {
   position:absolute;
   right:25px;
   top:35px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 .nav-list-container > li > a:hover,
 .logo>a:hover,

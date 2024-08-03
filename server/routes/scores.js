@@ -10,7 +10,7 @@ const {
 const { checkAuthenticated } = require("../lib/auth.config.js");
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
-router.use(checkAuthenticated)
+// router.use(checkAuthenticated)
 
 router.route("/").get( (req, res) => {
   // render frontend ejs

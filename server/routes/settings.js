@@ -3,7 +3,6 @@ const router = express.Router();
 const {checkAuthenticated} = require('../lib/auth.config')
 
 router.use(express.json());
-router.use(checkAuthenticated)
 
 router.route("/").get((req, res) => {
 //   res.send("welcome to settings");
