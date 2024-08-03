@@ -1,0 +1,70 @@
+/* remove later
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height:100vh;
+    width:100%;
+} */
+
+footer{
+    padding:.5rem;
+    background:#000;
+    border:3px solid #000;
+    /* height:100px; */
+    width:100%;
+    margin-top: 2rem;
+    position:absolute;
+    bottom:0;
+    left:0;
+    overflow-x:hidden;
+}
+#footer-wrapper{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    margin-right:-2rem;
+    /* border:2px solid yellow; */
+}
+
+#columns-container{
+    /* border:3px solid blue; */
+    width:50%;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: start;
+    gap:2rem;
+}
+.column-section{
+    /* border:3px solid green; */
+    height:100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap:.25rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.column-header>h3{
+    color:#f00;
+    text-decoration: underline;
+}
+.column-list-container{
+    display:flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap:.5rem;
+}
+.column-list-item>.list-link{
+    text-decoration: none;
+    color:#fff
+}

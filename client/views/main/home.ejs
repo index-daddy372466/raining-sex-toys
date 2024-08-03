@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/index.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="/css/footer.css">
     <title>Home</title>
-</head>
+  </head>
 
-<body>
-    <% if(!isAuthenticated){%>
-        <%- include('../partials/unsecured/navigation.ejs') %>
-        <% } else { %>
-        <%- include('../partials/secured/navigation.ejs') %>
-            <% } %>
+  <body>
+    <% if(!isAuthenticated){%> <%-
+    include('../partials/unsecured/navigation.ejs') %> <% } else { %> <%-
+    include('../partials/secured/navigation.ejs') %> <% } %>
     <h1 id="home">Home</h1>
+    <!-- footer -->
+    <% if(!isAuthenticated){%> <%-
+        include('../partials/unsecured/footer.ejs') %> <% } else { %> <%-
+        include('../partials/secured/footer.ejs') %> <% } %>
     
-</body>
+  </body>
 </html>

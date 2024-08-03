@@ -25,11 +25,15 @@ router.route("/login").post(
   });
   // register
   router.get("/register", checkNotAuthenticated, (req, res) => {
-    res.render('register.ejs');
+    res.render("register.ejs",{
+      isAuthenticated:req.isAuthenticated(),
+    });
   });
   // login
   router.route("/login").get(checkNotAuthenticated, (req, res) => {
-    res.render("login.ejs");
+    res.render("login.ejs",{
+      isAuthenticated:req.isAuthenticated(),
+    });
   });
   
   module.exports = router;

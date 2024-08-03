@@ -14,8 +14,9 @@ router.use(checkAuthenticated)
 
 router.route("/").get( (req, res) => {
   // render frontend ejs
-  res.render("scores.ejs");
-});
+  res.render("scores.ejs",{
+    isAuthenticated:req.isAuthenticated(),
+  });});
 
 router.route("/all").get( async (req, res) => {
   try {
