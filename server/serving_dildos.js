@@ -15,7 +15,7 @@ const nocache = require("nocache");
 initializePassport(passport);
 
 app.use(express.static("client/public"));
-app.set("views", path.resolve(__dirname, "../client/views"));
+app.set("views", path.resolve(__dirname, "../client/views/main"));
 // app.use(express.static('client/public'))
 app.set("view engine", "ejs");
 // middleware

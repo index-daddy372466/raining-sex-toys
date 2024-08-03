@@ -9,9 +9,9 @@
 
 <body>
     <% if(!isAuthenticated){%>
-        <%- include('partials/unsecured/navigation.ejs') %>
+        <%- include('../partials/unsecured/navigation.ejs') %>
         <% } else { %>
-        <%- include('partials/secured/navigation.ejs') %>
+        <%- include('../partials/secured/navigation.ejs') %>
             <% } %>
     <h1 id="home">Home</h1>
     

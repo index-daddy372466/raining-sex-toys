@@ -13,7 +13,7 @@
     <title>Raining Dildos App</title>
   </head>
   <body>
-    <%- include('partials/general/navigation.ejs') %>
+    <%- include('../partials/general/navigation.ejs') %>
     <!-- level indicator in background -->
     <h1 id="level" class="no-pointer"></h1>
     <!-- dildos fall from spaceship's exit holes -->
@@ -43,8 +43,8 @@
     <button id="start-btn" class="appear">Start</button>
     <!-- warning -->
     <hr id="warning" />
-    <% if(!isAuthenticated){%> <%- include('partials/unsecured/scoreboard.ejs')
-    %> <% } else { %> <%- include('partials/secured/scoreboard.ejs') %> <% } %>
+    <% if(!isAuthenticated){%> <%- include('../partials/unsecured/scoreboard.ejs')
+    %> <% } else { %> <%- include('../partials/secured/scoreboard.ejs') %> <% } %>
   </body>
   <script type="module" src="/js//main.js"></script>
 </html>
