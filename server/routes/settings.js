@@ -1,18 +1,22 @@
 const express = require("express");
 const router = express.Router();
-const {checkAuthenticated} = require('../lib/auth.config')
+// const {checkAuthenticated} = require('../lib/auth.config')
 
 router.use(express.json());
-
+const dummy = {display_name:'kyle',email:'kyle@kyle'}
 router.route("/").get((req, res) => {
-//   res.send("welcome to settings");
-// console.log(req.session)
-console.log(req.session.passport.user.display_name)
-let username = req.session.passport.user.display_name;
-res.render('settings.ejs',{
-user:username.toUpperCase(),
-isAuthenticated:req.isAuthenticated(),
-})
+//   const { display_name, email } = dummy
+  const { display_name, email } = req.session.passport.user;
+
+
+  // res.render('settings.ejs',{
+  // user:username.toUpperCase(),
+  // isAuthenticated:req.isAuthenticated(),
+  // })
+  res.render("settings.ejs", {
+    isAuthenticated: req.isAuthenticated(),
+    test: [display_name, email,'Current','New','Confirm'],
+  });
 });
 
 module.exports = router;

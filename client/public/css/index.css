@@ -134,4 +134,7 @@ body {
   transition: 0.25s;
   cursor:pointer;
 }
+.current-page{
+  color:red;
+}
 

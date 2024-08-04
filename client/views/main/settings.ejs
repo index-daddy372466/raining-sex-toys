@@ -3,18 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/settings.css">
-    <link rel="stylesheet" href="/css/index.css">
-    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/settings.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
     <title>Settings</title>
   </head>
   <body>
     <% if(!isAuthenticated){%> <%-
-        include('../partials/unsecured/navigation.ejs') %> <% } else { %> <%-
-        include('../partials/secured/navigation.ejs') %> <% } %>
-    <h1>Hello <%- user %></h1>
-    <% if(!isAuthenticated){%> <%-
-        include('../partials/unsecured/footer.ejs') %> <% } else { %> <%-
-        include('../partials/secured/footer.ejs') %> <% } %>
+    include('../partials/unsecured/navigation.ejs') %> <% } else { %> <%-
+    include('../partials/secured/navigation.ejs') %> <% } %>
+    <!-- <h1 class="h1-title"></h1> -->
+    <section id="settings-wrapper">
+      <div id="settings-container">
+        <div class="settings-user-container">
+          <span id="edit-display_name" class="edit-btn btn-edit">Edit</span>
+          <h3 class="container-header">Display Name</h3>
+          <input type="text" class="settings-user-input" disabled placeholder=<%- test[0] %>  />
+        </div>
+        <div class="settings-user-container">
+          <span id="edit-email" class="edit-btn btn-edit">Edit</span>
+          <h3 class="container-header">Email</h3>
+          <input type="text" class="settings-user-input" disabled placeholder=<%- test[1] %> />
+        </div>
+        <div class="settings-user-container">
+          <span id="edit-password" class="edit-btn btn-edit">Edit</span>
+          <h3 class="container-header">Password</h3>
+          <input type="password" class="settings-user-input password-field no-display" placeholder=<%- test[2] %> />
+          <input type="password" class="settings-user-input password-field no-display" placeholder=<%- test[3] %> />
+          <input type="password" class="settings-user-input password-field no-display" placeholder=<%- test[4] %> />
+
+        </div>
+      </div>
+    </section>
+    <% if(!isAuthenticated){%> <%- include('../partials/unsecured/footer.ejs')
+    %> <% } else { %> <%- include('../partials/secured/footer.ejs') %> <% } %>
   </body>
+  <script src="/js/settings.js"></script>
 </html>
