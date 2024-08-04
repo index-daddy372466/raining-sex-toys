@@ -21,6 +21,10 @@ const enableInput = (inputs, index) => {
   let button = document.createElement('button')
   button.textContent = 'Submit'
   button.classList.add('input-submit')
+  let testButtonPresence = ([...inputs[0].parentElement.children].filter(x=>x.classList.contains('input-submit')).length<1)
+  if(testButtonPresence){
+    inputs[0].parentElement.appendChild(button)
+  }
   if (index == 2) {
     inputs.map((x) => {
       x.classList.remove("no-display");
@@ -31,7 +35,7 @@ const enableInput = (inputs, index) => {
       input.disabled = false;
     });
   }
-  inputs[0].parentElement.appendChild(button)
+  
 };
 
 // settings - on edit click
