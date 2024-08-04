@@ -1,19 +1,39 @@
 const nav = document.querySelector("nav");
 const edits = document.querySelectorAll(".edit-btn");
 
-edits.forEach((edit, index) => {
-  let input;
-  input = [...edit.parentElement.children][
-    edit.parentElement.children.length - 1
-  ];
-  edit.onclick = (e) => {
-    let header = e.target.parentElement.children[1];
-    let pwInputs = [...edit.parentElement.children].slice(-3);
-    if (header.textContent == "Password") {
-      pwInputs.forEach((pw) => pw.classList.remove("no-display"));
+const disableInput = (arr) => {
+  arr.forEach((btn, idx) => {
+    let parent = btn.parentElement;
+    let children = [...parent.children];
+    let inputs = children.filter((element) => /input/.test(element.localName));
+    inputs.every((input) => (input.disabled = true));
+    if (/password/g.test(btn.id)) {
+      inputs.map((x) => x.classList.add("no-display"));
     }
+  });
+};
+const enableInput = (inputs, index) => {
+  if (index == 2) {
+    inputs.map((x) => {
+      x.classList.remove("no-display");
+      x.disabled = false;
+    });
+  } else {
+    inputs.every((input) => {
+      input.disabled = false;
+    });
+  }
+};
 
-    input.disabled = false;
-    input.value = input.placeholder;
+edits.forEach((edit, index) => {
+  edit.onclick = (e) => {
+    // disable input
+    let notTarget = [...edits].filter((ed, i) => i != index);
+    disableInput(notTarget);
+
+    // enable input
+    let children = [...e.target.parentElement.children];
+    let inputs = children.filter((element) => /input/.test(element.localName));
+    enableInput(inputs, index);
   };
 });

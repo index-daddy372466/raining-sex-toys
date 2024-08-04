@@ -6,7 +6,9 @@ router.use(express.json());
 const dummy = {display_name:'kyle',email:'kyle@kyle'}
 router.route("/").get((req, res) => {
 //   const { display_name, email } = dummy
-  const { display_name, email } = req.session.passport.user;
+  // const { display_name, email } = req.session.passport.user;
+    const { display_name, email } = dummy
+
 
 
   // res.render('settings.ejs',{
