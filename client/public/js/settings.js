@@ -1,6 +1,7 @@
 const nav = document.querySelector("nav");
 const edits = document.querySelectorAll(".edit-btn");
 
+// helper functions
 const disableInput = (arr) => {
   arr.forEach((btn, idx) => {
     let parent = btn.parentElement;
@@ -10,9 +11,16 @@ const disableInput = (arr) => {
     if (/password/g.test(btn.id)) {
       inputs.map((x) => x.classList.add("no-display"));
     }
+    if(children[children.length-1].localName=='button'){
+      let submit = children[children.length-1];
+      parent.removeChild(submit)
+    }
   });
 };
 const enableInput = (inputs, index) => {
+  let button = document.createElement('button')
+  button.textContent = 'Submit'
+  button.classList.add('input-submit')
   if (index == 2) {
     inputs.map((x) => {
       x.classList.remove("no-display");
@@ -23,8 +31,10 @@ const enableInput = (inputs, index) => {
       input.disabled = false;
     });
   }
+  inputs[0].parentElement.appendChild(button)
 };
 
+// settings - on edit click
 edits.forEach((edit, index) => {
   edit.onclick = (e) => {
     // disable input
@@ -37,3 +47,10 @@ edits.forEach((edit, index) => {
     enableInput(inputs, index);
   };
 });
+// settings - on window click
+window.onclick = e => {
+console.log(e.target)  
+if(e.target.id=='settings-container'){
+  disableInput(edits)
+}
+}
