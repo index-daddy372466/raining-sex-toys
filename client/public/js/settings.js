@@ -1,15 +1,25 @@
 const nav = document.querySelector("nav");
 const edits = document.querySelectorAll(".edit-btn");
-
+import updateSettings from "../func/updateSettings.js";
 // helper functions
+const handleSubmit = (button) => {
+  let options = ['name','email','password']
+    updateSettings(button,options)
+}
 const disableInput = (arr) => {
   arr.forEach((btn, idx) => {
     let parent = btn.parentElement;
     let children = [...parent.children];
     let inputs = children.filter((element) => /input/.test(element.localName));
-    inputs.every((input) => (input.disabled = true));
+    inputs.every((input) => {
+      input.disabled = true
+      input.value = '';
+    });
     if (/password/g.test(btn.id)) {
-      inputs.map((x) => x.classList.add("no-display"));
+      inputs.map((x) => {
+        x.classList.add("no-display")
+        x.value = ''
+      });
     }
     if(children[children.length-1].localName=='button'){
       let submit = children[children.length-1];
@@ -23,7 +33,8 @@ const enableInput = (inputs, index) => {
   button.classList.add('input-submit')
   let testButtonPresence = ([...inputs[0].parentElement.children].filter(x=>x.classList.contains('input-submit')).length<1)
   if(testButtonPresence){
-    inputs[0].parentElement.appendChild(button)
+    inputs[0].parentElement.appendChild(button);
+    handleSubmit(button)
   }
   if (index == 2) {
     inputs.map((x) => {
@@ -35,8 +46,8 @@ const enableInput = (inputs, index) => {
       input.disabled = false;
     });
   }
-  
 };
+
 
 // settings - on edit click
 edits.forEach((edit, index) => {
@@ -53,7 +64,6 @@ edits.forEach((edit, index) => {
 });
 // settings - on window click
 window.onclick = e => {
-console.log(e.target)  
 if(e.target.id=='settings-container'){
   disableInput(edits)
 }
