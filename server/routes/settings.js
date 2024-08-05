@@ -7,7 +7,7 @@ router.route("/").get((req, res) => {
 
   res.render("settings.ejs", {
     isAuthenticated: req.isAuthenticated(),
-    test: [display_name, email,'Current','New','Confirm'],
+    test: [display_name, email,'New','Confirm'],
   });
 });
 

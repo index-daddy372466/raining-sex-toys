@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const pg = require("../db.js").pool;
-const { checkAuthenticated } = require("../../lib/auth.config.js");
 const {
   GetUserByEmail,
   GetScoresByUserId,
@@ -16,17 +15,6 @@ const path = require("path");
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-// verify password
-router.route("/auth/verify").post(checkAuthenticated,(req, res) => {
-  const { password } = req.body;
-  console.log(password)
-  let verifyMe = /kyle/.test(password);
-  if (verifyMe) {
-    res.json({ verified: true });
-  } else {
-    res.json({ verified: false });
-  }
-});
 
 // read user/scores data - psql
 router.route("/psql/review/scores").get(async (req, res) => {

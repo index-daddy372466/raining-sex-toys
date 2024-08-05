@@ -1,5 +1,8 @@
 import updateSettings from "../func/updateSettings.js";
 const edits = document.querySelectorAll(".edit-btn");
+const dialogbox = document.getElementById("dialog");
+const pwfield = document.querySelector(".dialog-pw");
+
 // const nav = document.querySelector("nav");
 // const dialogbox = document.getElementById('dialog')
 // const settingsWrapper = document.querySelector('#settings-wrapper')
@@ -90,5 +93,7 @@ window.onclick = (e) => {
   // if window click-target is equal to settings container , disable edits (UI)
   if (e.target.id == "settings-container") {
     disableEdit(edits);
+    dialogbox.removeAttribute('open')
   }
+
 };

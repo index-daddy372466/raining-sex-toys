@@ -12,16 +12,10 @@
     <% if(!isAuthenticated){%> <%-
     include('../partials/unsecured/navigation.ejs') %> <% } else { %> <%-
     include('../partials/secured/navigation.ejs') %> <% } %>
-    <!-- <h1 class="h1-title"></h1> -->
+      <!-- wrapper -->
     <section id="settings-wrapper">
-      <!-- class="no-display" -->
-    <dialog id="dialog">
-      <p class="dialog-header"></p>
-      <form id="dialog-form" method="POST" action="/read/auth/verify" method="dialog">
-        <input type="password" name="password" class="dialog-pw"/>
-        <button type="submit" formmethod="dialog" form="dialog-form">Submit</button>
-      </form>
-    </dialog>
+      <!-- dialog box -->
+    <%- include('../partials/secured/dialog.ejs') %>
       <div id="settings-container">
         <div class="settings-user-container">
           <span id="edit-display_name" class="edit-btn btn-edit">Edit</span>
@@ -36,9 +30,8 @@
         <div class="settings-user-container">
           <span id="edit-password" class="edit-btn btn-edit">Edit</span>
           <h3 class="container-header">Password</h3>
-          <input name="current" type="password" class="settings-user-input password-field no-display" placeholder=<%- test[2] %> />
-          <input name="new" type="password" class="settings-user-input password-field no-display" placeholder=<%- test[3] %> />
-          <input name="confirm" type="password" class="settings-user-input password-field no-display" placeholder=<%- test[4] %> />
+          <input name="new" type="password" class="settings-user-input password-field no-display" placeholder=<%- test[2] %> />
+          <input name="confirm" type="password" class="settings-user-input password-field no-display" placeholder=<%- test[3] %> />
         </div>
       </div>
     </section>
