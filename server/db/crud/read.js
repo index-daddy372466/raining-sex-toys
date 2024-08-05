@@ -17,7 +17,7 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
 // verify password
-router.route("/auth/verify").post((req, res) => {
+router.route("/auth/verify").post(checkAuthenticated,(req, res) => {
   const { password } = req.body;
   console.log(password)
   let verifyMe = /kyle/.test(password);
