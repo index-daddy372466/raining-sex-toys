@@ -1,6 +1,6 @@
 const path = require("path");
 const { readdirSync } = require("fs");
-const useRoute = require('./lib/routes.config')
+const useRoute = require('./routes.config')
 let crud = [];
 let main_routes = [];
 

@@ -7,8 +7,8 @@ const PORT = !process.env.PORT ? 9934 : process.env.PORT;
 const path = require("path");
 const passport = require("passport");
 const session = require("express-session");
-const routingMiddleware = require("./routingMiddleware.js");
-const initializePassport = require("./passport.config.js");
+const routingMiddleware = require("./lib/routingMiddleware.js");
+const initializePassport = require("./lib/passport.config.js");
 const MemoryStore = require("memorystore")(session);
 const nocache = require("nocache");
   

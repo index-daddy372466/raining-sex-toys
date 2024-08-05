@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const pg = require("./db/db.js").pool;
+const pg = require("../db/db.js").pool;
 // const { mysqlObj, pool } = require("./db/db.js");
 const LocalStrategy = require("passport-local").Strategy;
 
