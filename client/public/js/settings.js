@@ -1,6 +1,9 @@
+import updateSettings from "../func/updateSettings.js";
 const nav = document.querySelector("nav");
 const edits = document.querySelectorAll(".edit-btn");
-import updateSettings from "../func/updateSettings.js";
+const dialogbox = document.getElementById('dialog')
+const settingsWrapper = document.querySelector('#settings-wrapper')
+
 // helper functions
 const handleSubmit = (button) => {
   let options = ['name','email','password']
@@ -31,7 +34,8 @@ const enableInput = (inputs, index) => {
   let button = document.createElement('button')
   button.textContent = 'Submit'
   button.classList.add('input-submit')
-  let testButtonPresence = ([...inputs[0].parentElement.children].filter(x=>x.classList.contains('input-submit')).length<1)
+  let testButtonPresence = ([...inputs[0].parentElement.children]
+    .filter(x=>x.classList.contains('input-submit')).length<1)
   if(testButtonPresence){
     inputs[0].parentElement.appendChild(button);
     handleSubmit(button)
@@ -47,7 +51,6 @@ const enableInput = (inputs, index) => {
     });
   }
 };
-
 
 // settings - on edit click
 edits.forEach((edit, index) => {

@@ -6,10 +6,11 @@ import postFetch from "./postFetch.js";
 const compareHeaderToBtn = (o, h) => o.includes(h);
 const authenticateChange = async (setting) => {
   dialogbox.setAttribute("open", true);
-  let title = `Verify password to update: ${setting}`,
+  dialogbox.style = `position:absolute;left:${(window.innerWidth/2)-dialogbox.clientWidth}px;`
+  let title = `Verify password to update: <b style="color:red;">${setting}</b>`,
     para = dialogbox.children[0],
     authenticated;
-  para.textContent = title;
+  para.innerHTML = title;
   submit.onclick = async (e) => {
     let payload = {
       password: document.querySelector("#dialog-form>input").value,
