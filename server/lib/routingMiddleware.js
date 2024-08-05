@@ -8,7 +8,7 @@ let main_routes = [];
 const routingMiddleware = (app) => {
   // base routing
   // routing Apis for C.R.U.D. functionality
-  readdirSync(path.resolve(__dirname, "db/crud")).forEach((file) => {
+  readdirSync(path.resolve(__dirname, "../db/crud")).forEach((file) => {
     crud.push(file);
   });
   crud.forEach((file, index) => {
@@ -16,7 +16,7 @@ const routingMiddleware = (app) => {
   });
   // base routing
   // routing Apis for each client-screen
-  readdirSync(path.resolve(__dirname, "routes")).forEach((file) => {
+  readdirSync(path.resolve(__dirname, "../routes")).forEach((file) => {
     main_routes.push(file);
   });
   main_routes.forEach((file) => {

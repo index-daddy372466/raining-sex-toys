@@ -16,7 +16,7 @@ const authenticateChange = async (setting) => {
       password: document.querySelector("#dialog-form>input").value,
     };
 
-    authenticated = await postFetch("/read/auth/verify", payload)
+    let authenticated = await postFetch("/read/auth/verify", payload)
       .then((r) => r.json())
       .then((data) => {
         console.log(data);
