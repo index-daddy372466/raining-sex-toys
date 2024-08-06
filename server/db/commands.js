@@ -1,4 +1,6 @@
 const pool = require("./db.js").pool;
+const bcrypt = require('bcrypt')
+const salt = 11
 
 // get scores
 class GetUsers {
@@ -58,7 +60,6 @@ class GetUserByEmail {
     }
   }
 }
-
 // get scores
 class GetScores {
   constructor(framework) {
@@ -180,6 +181,7 @@ class GetBestScore {
     }
   }
 }
+// get worst score
 class GetWorstScore {
   constructor(framework, id) {
     this.framework = framework;
@@ -202,6 +204,33 @@ class GetWorstScore {
     }
   }
 }
+// update account in settings
+class UpdateAccount {
+  constructor(framework, id, type) {
+    this.framework = framework;
+    this.id = id;
+    this.type = type;
+  }
+  async executeQuery() {
+    if (this.framework == "psql") {
+      try {
+        if(this.type.password){
+          let hash = await bcrypt.hash(this.type.password,salt)
+          let updated = await pool.query(`update users set ${Object.keys(this.type)[0]} = $1 where user_id = $2`,[hash,this.id])
+        }
+        else{
+        // method
+        let updated = await pool.query(`update users set ${Object.keys(this.type)[0]} = $1 where user_id = $2`,[Object.values(this.type)[0],this.id])
+        }
+         
+      } catch (err) {
+        throw err;
+      }
+    } else {
+      throw new Error("No framework detected");
+    }
+  }
+}
 
 module.exports = {
   GetWorstScore,
@@ -213,4 +242,5 @@ module.exports = {
   GetUserById,
   GetUserByEmail,
   UpdateScoreByUserId,
+  UpdateAccount
 };

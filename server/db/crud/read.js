@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const pg = require("../db.js").pool;
+const { checkAuthenticated } = require('../../lib/auth.config.js')
 const {
   GetUserByEmail,
   GetScoresByUserId,
@@ -9,7 +10,6 @@ const {
   GetUsers,
   GetUserById,
 } = require("../commands.js");
-const path = require("path");
 
 // middleware
 router.use(express.json());
@@ -29,6 +29,14 @@ router.route("/psql/review/scores").get(async (req, res) => {
   }
 });
 
+// api to post new update
+router.route('/set-aside').post(checkAuthenticated,(req,res)=>{
+  const {name,email,new_pw,confirm_pw} = req.body;
+  req.session.aside = req.body
+  res.json(req.body)
+})
+
+// get all users
 router.route("/psql/review/users").get(async (req, res) => {
   try {
     let scores = new GetUsers("psql");

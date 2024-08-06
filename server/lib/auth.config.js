@@ -1,3 +1,5 @@
+
+const bcrypt = require('bcrypt')
 function checkNotAuthenticated(req, res, next) {
   if (!req.isAuthenticated()) {
     console.log("you are not authenticated!!!");
@@ -19,4 +21,18 @@ function checkAuthenticated(req, res, next) {
   }
 }
 
-module.exports = { checkNotAuthenticated, checkAuthenticated };
+async function updateAuth(req,res,next){
+  let hash = req.session.passport.user.password
+  let { password } = req.body;
+  
+    if(await bcrypt.compare(password,hash)){    
+      next();
+    }
+    else{
+      console.log('wrong password')
+      res.status(401).json({err:'wrong'})
+    }  
+
+}
+
+module.exports = { checkNotAuthenticated, checkAuthenticated, updateAuth };

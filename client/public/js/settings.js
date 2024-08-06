@@ -93,7 +93,6 @@ window.onclick = (e) => {
   // if window click-target is equal to settings container , disable edits (UI)
   if (e.target.id == "settings-container") {
     disableEdit(edits);
-    dialogbox.removeAttribute('open')
+    dialogbox.removeAttribute("open");
   }
-
 };

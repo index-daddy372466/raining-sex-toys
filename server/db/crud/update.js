@@ -1,27 +1,39 @@
 const express = require("express");
 const router = express.Router();
-const { UpdateScoreByUserId } = require("../commands.js");
+const { UpdateAccount } = require("../commands.js");
 const { urlencoded } = require("body-parser");
 const pg = require("../db.js").pool;
-const { checkAuthenticated } = require("../../lib/auth.config.js");
+const { checkAuthenticated, updateAuth } = require("../../lib/auth.config.js");
 router.use(express.json());
 router.use(express.json(urlencoded({ extended: true })));
+
 
 router.route("/").get((req, res) => {
   res.json({ data: "update" });
 });
 
 // verify password
-router.route("/auth/verify").post(checkAuthenticated,(req, res) => {
-  const { password } = req.body;
-  console.log(password)
-  let verifyMe = /(kyle|fuck|123)/.test(password);
-  if (verifyMe && !/(function|number|object|array)/.test(typeof(verifyMe))) {
-    res.json({ verified: true });
-  } else {
-    res.json({ verified: false });
+router.route("/auth/verify").post(checkAuthenticated, updateAuth, async (req, res) => {
+    const aside = req.session.aside;
+    try{
+    // update account data
+    const updateAccount = new UpdateAccount('psql',+req.session.passport.user.user_id,aside)
+    await updateAccount.executeQuery()
+    if(aside.password){
+    req.session.destroy(err=>{
+    return err ? console.log(err) : console.log('user signed out')
+    });
+    res.redirect('/')
+    }
+    else{
+      res.json({verified:true})
   }
-});
+    }
+    catch(err){
+      console.log(err)
+    }
+    
+  });
 
 router.route("/score/:id").post(async (req, res) => {
   let { score, best } = req.body;
