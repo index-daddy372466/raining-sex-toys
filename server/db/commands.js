@@ -1,6 +1,4 @@
 const pool = require("./db.js").pool;
-const bcrypt = require('bcrypt')
-const salt = 11
 
 // get scores
 class GetUsers {
@@ -214,9 +212,9 @@ class UpdateAccount {
   async executeQuery() {
     if (this.framework == "psql") {
       try {
-        if(this.type.password){
-          let hash = await bcrypt.hash(this.type.password,salt)
-          let updated = await pool.query(`update users set ${Object.keys(this.type)[0]} = $1 where user_id = $2`,[hash,this.id])
+        console.log(this.type)
+        if(this.type.password!=undefined){
+          let updated = await pool.query(`update users set ${Object.keys(this.type)[0]} = $1 where user_id = $2`,[this.type.password,this.id])
         }
         else{
         // method

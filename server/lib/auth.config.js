@@ -20,7 +20,7 @@ function checkAuthenticated(req, res, next) {
     res.redirect("/");
   }
 }
-
+// credential confirmation before updating information
 async function updateAuth(req,res,next){
   let hash = req.session.passport.user.password
   let { password } = req.body;

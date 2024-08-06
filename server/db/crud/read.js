@@ -1,8 +1,10 @@
 require("dotenv").config();
+const salt = 11;
+let bcrypt = require("bcrypt");
 const express = require("express");
 const router = express.Router();
 const pg = require("../db.js").pool;
-const { checkAuthenticated } = require('../../lib/auth.config.js')
+const { checkAuthenticated } = require("../../lib/auth.config.js");
 const {
   GetUserByEmail,
   GetScoresByUserId,
@@ -14,7 +16,6 @@ const {
 // middleware
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
-
 
 // read user/scores data - psql
 router.route("/psql/review/scores").get(async (req, res) => {
@@ -30,19 +31,29 @@ router.route("/psql/review/scores").get(async (req, res) => {
 });
 
 // api to post new update
-router.route('/set-aside').post(checkAuthenticated,(req,res)=>{
-  const {name,email,new_pw,confirm_pw} = req.body;
-  req.session.aside = req.body
-  res.json(req.body)
-})
+router.route("/set-aside").post(checkAuthenticated, async (req, res) => {
+  console.log('portal body')
+  console.log(req.body)
+  if (req.body.password) {
+    let hash = bcrypt.hash(req.body.password, salt);
+    delete req.body.password;
+    console.log("old body");
+    console.log(req.body);
+    req.body.password = await hash;
+  }
+  req.session.aside = req.body;
+    console.log("new body");
+    console.log(req.body);
+  res.json(req.body);
+});
 
 // get all users
-router.route("/psql/review/users").get(async (req, res) => {
+router.route("/psql/review/users").get(checkAuthenticated, async (req, res) => {
   try {
     let scores = new GetUsers("psql");
     let found = await scores.executeQuery();
     return found.length < 1
-      ? res.status(401).send("Cannot reach information")
+      ? res.status(404).send("Cannot reach information")
       : res.json({ users: found });
   } catch (err) {
     throw err;
@@ -65,33 +76,41 @@ router.route("/psql/review/scores/:id").get(async (req, res) => {
 });
 
 // get user by id - psql
-router.route("/psql/review/users/:id").get(async (req, res) => {
-  const { id } = req.params;
+router
+  .route("/psql/review/users/:id")
+  .get(checkAuthenticated, async (req, res) => {
+    const { id } = req.params;
 
-  try {
-    let getUser = new GetUserById("psql", id);
-    let found = await getUser.executeQuery();
-    return found.length < 1
-      ? res.send("no users found")
-      : res.json({ data: found });
-  } catch (err) {
-    throw err;
-  }
-});
+    try {
+      if (id == req.session.passport.user.user_id) {
+        let getUser = new GetUserById("psql", id);
+        let found = await getUser.executeQuery();
+        return found.length < 1
+          ? res.send("no users found")
+          : res.json({ data: found });
+      } else {
+        res.json({ err: "Incorrect query. Try again." });
+      }
+    } catch (err) {
+      throw err;
+    }
+  });
 
 // get user by email - psql
-router.route("/psql/review/:email").get(async (req, res) => {
-  const { email } = req.params;
+router
+  .route("/psql/review/:email")
+  .get(checkAuthenticated, async (req, res) => {
+    const { email } = req.params;
 
-  try {
-    let getUserByEmail = new GetUserByEmail("psql", email);
-    let found = await getUserByEmail.executeQuery();
-    return found.length < 1
-      ? res.send("no users found")
-      : res.json({ data: found });
-  } catch (err) {
-    throw err;
-  }
-});
+    try {
+      let getUserByEmail = new GetUserByEmail("psql", email);
+      let found = await getUserByEmail.executeQuery();
+      return found.length < 1
+        ? res.send("no users found")
+        : res.json({ data: found });
+    } catch (err) {
+      throw err;
+    }
+  });
 
 module.exports = router;

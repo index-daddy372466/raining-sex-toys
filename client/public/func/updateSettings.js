@@ -25,6 +25,7 @@ const authenticateChange = async (setting) => {
     let payload = {
       password: document.querySelector("#dialog-form>input").value,
     };
+    console.log(payload)
     await postFetch(verifyMe, payload)
   };
   cancel.onclick = (e) => {

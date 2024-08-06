@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { UpdateAccount } = require("../commands.js");
+const { UpdateAccount, UpdateScoreByUserId } = require("../commands.js");
 const { urlencoded } = require("body-parser");
 const pg = require("../db.js").pool;
 const { checkAuthenticated, updateAuth } = require("../../lib/auth.config.js");
@@ -20,10 +20,9 @@ router.route("/auth/verify").post(checkAuthenticated, updateAuth, async (req, re
     const updateAccount = new UpdateAccount('psql',+req.session.passport.user.user_id,aside)
     await updateAccount.executeQuery()
     if(aside.password){
-    req.session.destroy(err=>{
+    req.session.destroy((err)=>{
     return err ? console.log(err) : console.log('user signed out')
     });
-    res.redirect('/')
     }
     else{
       res.json({verified:true})
