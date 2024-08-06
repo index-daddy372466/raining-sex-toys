@@ -3,9 +3,7 @@ let level = 0;
 const level_element = document.getElementById("level");
 
 export default async function levelUp(levy) {
-  // console.log('level is going up')
-  // level up
-  // if levy exists, then level = levy
+  // fetch(`/game/level`).then(r=>r.json()).then(d=>console.log(d.wave))
   if (levy) {
     level = +levy;
   }

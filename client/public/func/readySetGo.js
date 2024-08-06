@@ -1,5 +1,6 @@
 import levelUp from "./levelUp.js";
 export default async function readySetGo(btn, clicked, levy) {
+  console.log(levy < 1 ? levy : levy-=1)
   // ready set go on startGame
   const words = ["ready", "set", "go"].map((w) => w.toUpperCase());
   await levelUp(levy);

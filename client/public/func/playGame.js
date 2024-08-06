@@ -5,6 +5,7 @@ import postFetch from "./postFetch.js";
 let board = document.querySelectorAll(".scoreboard-list-item");
 let nav = document.getElementById("nav-container");
 let footer = document.getElementById("footer-wrapper");
+let levelElement = document.getElementById("level-choice-container");
 
 export default function playGame(arr, posi, btn, ship) {
   const warning = document.getElementById("warning"),
@@ -68,13 +69,14 @@ export default function playGame(arr, posi, btn, ship) {
       });
       return;
     };
-
-  let current_speed = 5,
-    current_wave = getWaves(+document.getElementById("level").textContent),
+    let level = +document.getElementById("level").textContent,
+    current_wave = getWaves(level),
+    current_speed =  level < 1 ? 5 : 5 + (2.5*level),
     copy_wave = current_wave,
     genisDone = false,
     gen,
     interval;
+    console.log(current_speed)
   // dildo manager
   const manageDildo = {
     moveImg: (images) => {
@@ -154,6 +156,9 @@ export default function playGame(arr, posi, btn, ship) {
       warning.classList.remove("appear");
       warning.classList.add("disappear");
       document.getElementById("level").textContent = 0;
+      console.log(levelElement)
+      levelElement.classList.remove('disappear')
+      
 
       let current = [...board].filter((x) =>
         /current/gi.test(x.children[0].textContent)
@@ -227,7 +232,7 @@ export default function playGame(arr, posi, btn, ship) {
       images1.forEach((image) => {
         let currentY = image.getBoundingClientRect().y;
         if (currentY > window.innerHeight) {
-          current_speed = 10;
+          current_speed = 5;
           // clear interval
           clearInterval(interval);
           // remove dildos
@@ -248,6 +253,7 @@ export default function playGame(arr, posi, btn, ship) {
           await levelUp();
           // increate speed by 2.5 after each wave
           current_speed += 2.5;
+          console.log(current_speed)
           // clearInterval(interval);
           copy_wave = getWaves(+document.getElementById("level").textContent);
           current_wave = copy_wave;

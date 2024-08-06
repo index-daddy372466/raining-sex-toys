@@ -6,7 +6,10 @@ import scoreBoard from "../../func/scoreBoard.js";
 // scoreboard tile transition on load (enter game)
 let board = document.querySelectorAll(".scoreboard-list-item");
 let scoreboard = document.querySelector(".scoreboard-list-container")
+let level_container = document.getElementById('level-choice-container')
+let level_lis = document.querySelectorAll('.level-list > li ')
 let arr = [...board];
+let currentLevel;
 // console.log(arr)
 window.addEventListener("load", (e) => {
   // console.log(arr);
@@ -18,6 +21,7 @@ window.addEventListener("load", (e) => {
     }, 275 * (idx + 1));
   });
 });
+
 const spaceship = document.getElementById("spaceship-container"),
   start = document.getElementById("start-btn"),
   holes = document.querySelectorAll(".list-item>div"),
@@ -49,16 +53,45 @@ holes.forEach((hole, idx) => {
   posi.push(position);
 });
 
-// start the game
-startGame(
-  start,
-  spaceship,
-  dildos,
-  posi,
-  readySetGo,
-  playGame,
-  level_element.textContent,
-  scoreboard
-);
 
 scoreBoard(scoreboard);
+
+
+
+// level picker
+setTimeout(()=>{
+  level_lis.forEach((li,index)=>{
+    li.onclick=e=>{
+      currentLevel = e.target.textContent
+      level_element.textContent = currentLevel
+      // start the game
+      startGame(
+        start,
+        spaceship,
+        dildos,
+        posi,
+        readySetGo,
+        playGame,
+        currentLevel,
+        scoreboard,
+        level_container
+      );
+    }
+    // start the game
+    startGame(
+      start,
+      spaceship,
+      dildos,
+      posi,
+      readySetGo,
+      playGame,
+      currentLevel,
+      scoreboard,
+      level_container
+    );
+  })
+  level_container.classList.add('drop-down-picker')
+},250)
+  
+  
+  

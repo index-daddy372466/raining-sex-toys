@@ -15,9 +15,9 @@ const authenticateChange = async (setting) => {
   dialogbox.style = `position:fixed;left:${
     dialogbox.parentElement.clientWidth / 2 - dialogbox.clientWidth / 2
   }px`;
-  let title = `Type in your <i style="font-size:18px;text-decoration:underline;">password</i> to update: <b style="color:red;">${setting}</b>`,
+  let dialogueTitle = `Type in your <i style="font-size:18px;text-decoration:underline;">current password</i> to update: <b style="color:red;">${setting}</b>`,
     para = dialogbox.children[0];
-  para.innerHTML = title;
+  para.innerHTML = dialogueTitle;
 
   submit.onclick = async (e) => {
     dialogcontainer.classList.add("no-display");

@@ -9,12 +9,15 @@ export default function startGame(
   readySetGo,
   playGame,
   level,
-  board
+  board,
+  level_container
 ) {
   // prepare style for start button once clickes
   const btn_clicked = `background:#333;color:rgb(42, 170, 138);border:none;`;
   // click button to start game
   btn.onclick = async (e) => {
+    // remove level picker
+    level_container.classList.add('disappear')
     let arr = [...board.children];
 
     if (arr.length > 1) {

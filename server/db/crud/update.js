@@ -37,8 +37,9 @@ router.route("/auth/verify").post(checkAuthenticated, updateAuth, async (req, re
 router.route("/score/:id").post(async (req, res) => {
   let { score, best } = req.body;
   const { id } = req.params;
+  let level = req.session.wave
   try {
-    let getScores = new UpdateScoreByUserId("psql", best, score, id);
+    let getScores = new UpdateScoreByUserId("psql", best, score, id, level);
     let updated = await getScores.executeQuery();
     return !updated
       ? res.json({ data: "scores not updated" })

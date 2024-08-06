@@ -98,11 +98,12 @@ class GetScoresByUserId {
 }
 // update scoreboard by user ID
 class UpdateScoreByUserId {
-  constructor(framework, best, score, id) {
+  constructor(framework, best, score, id,level) {
     this.framework = framework;
     this.best = best;
     this.score = score;
     this.id = id;
+    this.level = level;
   }
 
   async executeQuery() {
@@ -117,8 +118,8 @@ class UpdateScoreByUserId {
         let avg =
           average.rows[0].avg == null ? this.score : +average.rows[0].avg;
         let updateScore = await pool.query(
-          `insert into scores(best,average,u_id,score) values($1,$2,$3,$4)`,
-          [this.best, avg, this.id, this.score]
+          `insert into scores(best,average,u_id,score,level) values($1,$2,$3,$4,$5)`,
+          [this.best, avg, this.id, this.score, this.level]
         );
 
         if (!updateScore) console.log("error on insert");
@@ -229,6 +230,28 @@ class UpdateAccount {
     }
   }
 }
+// update account in settings
+class getHighestLevel {
+  constructor(framework, id) {
+    this.framework = framework;
+    this.id = id;
+  }
+  async executeQuery() {
+    if (this.framework == "psql") {
+      try {
+          let found = await pool.query(`select level from scores where u_id=$1 order by level desc `,[this.id])
+          if(found.rows.length>0){
+            return found.rows[0].level
+          }
+        
+      } catch (err) {
+        throw err;
+      }
+    } else {
+      throw new Error("No framework detected");
+    }
+  }
+}
 
 module.exports = {
   GetWorstScore,
@@ -240,5 +263,6 @@ module.exports = {
   GetUserById,
   GetUserByEmail,
   UpdateScoreByUserId,
-  UpdateAccount
+  UpdateAccount,
+  getHighestLevel
 };

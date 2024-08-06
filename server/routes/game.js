@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { readdirSync, readFileSync } = require("fs");
+const { checkAuthenticated } = require('../lib/auth.config.js')
+const { getHighestLevel } = require('../db/commands.js')
 const path = require("path");
 const svg = [];
 
@@ -13,26 +15,25 @@ router.use(function(req, res, next) {
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-router.route("/").get((req, res) => {
-  if (req.isAuthenticated()) {
-    req.session.identity = req.user.user_id;
-  }
-  router.route("/token").get((req, res) => {
-    if (req.isAuthenticated()) {
-      res.json({ token: req.session });
-    } else {
-      res.json({ token: "no token (not authenticated)" });
-    }
-  });
+router.route("/").get(checkAuthenticated, async(req, res) => {
+  let db_prop = await new getHighestLevel('psql',req.session.identity).executeQuery();
+  console.log('level status:')
+  console.log(db_prop)
+
   // console.log(req.session);
   res.render("index", {
     isAuthenticated: req.isAuthenticated(),
+    levels: [0].concat([...new Array(db_prop).fill('')].map((_,idx)=>idx+1)).map(Number)
   });
 });
-router.use((req, res, next) => {
-  console.log(req.isAuthenticated());
-  next();
+router.route("/token").get((req, res) => {
+  if (req.isAuthenticated()) {
+    res.json({ token: req.session });
+  } else {
+    res.json({ token: "no token (not authenticated)" });
+  }
 });
+
 // get svgs/icons
 router.route("/svgs").get((req, res) => {
   // get absolute path from icons dir
@@ -55,6 +56,7 @@ router.route("/svgs").get((req, res) => {
 router.route("/level/:wave").post((req, res) => {
   const { wave } = req.body;
   if (typeof wave == "number") {
+    req.session.wave = wave;
     res.json({ wave: wave });
   } else {
     res.json({ api: "type not found" });
