@@ -190,3 +190,7 @@ body {
   justify-content: center;
   cursor:pointer;
 }
+.level-picker-picked {
+background:#fff;
+color:#000;
+}

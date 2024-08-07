@@ -71,7 +71,7 @@ export default function playGame(arr, posi, btn, ship) {
     };
     let level = +document.getElementById("level").textContent,
     current_wave = getWaves(level),
-    current_speed =  level < 1 ? 5 : 5 + (2.5*level),
+    current_speed =  level < 1 ? 5 : 5 + (.5*level),
     copy_wave = current_wave,
     genisDone = false,
     gen,
@@ -155,11 +155,7 @@ export default function playGame(arr, posi, btn, ship) {
       btn.style = revertStyle;
       warning.classList.remove("appear");
       warning.classList.add("disappear");
-      document.getElementById("level").textContent = 0;
-      console.log(levelElement)
-      levelElement.classList.remove('disappear')
       
-
       let current = [...board].filter((x) =>
         /current/gi.test(x.children[0].textContent)
       );
@@ -209,6 +205,7 @@ export default function playGame(arr, posi, btn, ship) {
       }
 
       current[0].children[1].textContent = 0;
+      window.location.reload()
     },
   };
 

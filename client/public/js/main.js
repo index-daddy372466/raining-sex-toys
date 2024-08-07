@@ -62,6 +62,10 @@ scoreBoard(scoreboard);
 setTimeout(()=>{
   level_lis.forEach((li,index)=>{
     li.onclick=e=>{
+      level_container.classList.add('level-picker-picked')
+      setTimeout(() => {
+        level_container.classList.remove('level-picker-picked')
+      }, 300);
       currentLevel = e.target.textContent
       level_element.textContent = currentLevel
       // start the game
