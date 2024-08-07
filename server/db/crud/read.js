@@ -32,17 +32,10 @@ router.route("/psql/review/scores").get(async (req, res) => {
 
 // api to post new update
 router.route("/set-aside").post(checkAuthenticated, async (req, res) => {
-  console.log('portal body')
-  // console.log(req.body)
   if (req.body.password) {
     req.body.password = await bcrypt.hash(req.body.password, salt)
-    // console.log("old body");
-    // console.log(req.body);
-    // req.body.password = await hash;
   }
   req.session.aside = req.body;
-    // console.log("new body");
-    // console.log(req.body);
   res.json(req.body);
 });
 

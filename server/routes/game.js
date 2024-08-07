@@ -15,15 +15,20 @@ router.use(function(req, res, next) {
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-router.route("/").get(checkAuthenticated, async(req, res) => {
-  let db_prop = await new getHighestLevel('psql',req.session.identity).executeQuery();
-  console.log('level status:')
-  console.log(db_prop)
+router.route("/").get(async(req, res) => {
+  let db_prop;
+  if(req.isAuthenticated()){
+    req.session.identity = req.user.user_id;
+    db_prop = await new getHighestLevel('psql',req.session.identity).executeQuery()
+  }
+  else{
+    db_prop = 1;
+  }
 
   // console.log(req.session);
   res.render("index", {
     isAuthenticated: req.isAuthenticated(),
-    levels: [0].concat([...new Array(db_prop).fill('')].map((_,idx)=>idx+1)).map(Number)
+    levels: ([...new Array(db_prop).fill('')].map((_,idx)=>idx+1)).map(Number)
   });
 });
 router.route("/token").get((req, res) => {

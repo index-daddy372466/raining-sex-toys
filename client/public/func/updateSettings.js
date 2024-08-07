@@ -20,13 +20,15 @@ const authenticateChange = async (setting) => {
   para.innerHTML = dialogueTitle;
 
   submit.onclick = async (e) => {
+    let login = '/login'
     dialogcontainer.classList.add("no-display");
     dialogcontainer.classList.remove("add-flex");
     let payload = {
       password: document.querySelector("#dialog-form>input").value,
     };
-    console.log(payload)
-    await postFetch(verifyMe, payload)
+    let verified = await postFetch(verifyMe, payload).then(r=>r.json()).then(d=>(d.verified||false))
+    let sendToLogin = window.location.origin + login;
+    if(verified==true)window.location.href = sendToLogin;
   };
   cancel.onclick = (e) => {
     e.preventDefault();

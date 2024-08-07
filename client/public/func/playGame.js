@@ -5,7 +5,6 @@ import postFetch from "./postFetch.js";
 let board = document.querySelectorAll(".scoreboard-list-item");
 let nav = document.getElementById("nav-container");
 let footer = document.getElementById("footer-wrapper");
-let levelElement = document.getElementById("level-choice-container");
 
 export default function playGame(arr, posi, btn, ship) {
   const warning = document.getElementById("warning"),

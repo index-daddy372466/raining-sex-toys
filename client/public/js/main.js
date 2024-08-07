@@ -56,12 +56,15 @@ holes.forEach((hole, idx) => {
 
 scoreBoard(scoreboard);
 
-
-
 // level picker
 setTimeout(()=>{
   level_lis.forEach((li,index)=>{
     li.onclick=e=>{
+      // invalid number correction-handler
+      if(+e.target.textContent != level_lis[index]){
+          console.log(e.target.textContent)
+          e.target.textContent = index + 1;
+      }
       level_container.classList.add('level-picker-picked')
       setTimeout(() => {
         level_container.classList.remove('level-picker-picked')
@@ -81,18 +84,18 @@ setTimeout(()=>{
         level_container
       );
     }
-    // start the game
-    startGame(
-      start,
-      spaceship,
-      dildos,
-      posi,
-      readySetGo,
-      playGame,
-      currentLevel,
-      scoreboard,
-      level_container
-    );
+      // start the game
+      startGame(
+        start,
+        spaceship,
+        dildos,
+        posi,
+        readySetGo,
+        playGame,
+        currentLevel,
+        scoreboard,
+        level_container
+      );
   })
   level_container.classList.add('drop-down-picker')
 },250)

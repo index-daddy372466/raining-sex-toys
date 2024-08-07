@@ -14,19 +14,18 @@ router.route("/").get((req, res) => {
 
 // verify password
 router.route("/auth/verify").post(checkAuthenticated, updateAuth, async (req, res) => {
+    const checkForSideData = (data) => data.password||data.email||data.display_name
     const aside = req.session.aside;
     try{
     // update account data
     const updateAccount = new UpdateAccount('psql',+req.session.passport.user.user_id,aside)
     await updateAccount.executeQuery()
-    if(aside.password){
+    if(checkForSideData(aside)){
     req.session.destroy((err)=>{
     return err ? console.log(err) : console.log('user signed out')
     });
     }
-    else{
-      res.json({verified:true})
-  }
+    res.json({verified:true})
     }
     catch(err){
       console.log(err)
