@@ -197,11 +197,3 @@ body {
 background:#fff;
 color:#000;
 }
-
-.center-word{
-  position:absolute;
-  font-size:40px;
-  background:#000;
-  color:#f00;
-  padding:1rem;
-}

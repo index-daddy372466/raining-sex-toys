@@ -104,7 +104,8 @@ setTimeout(()=>{
 
 // console.log(window.navigator.userAgentData.mobile)
 let isMobile = window.navigator.userAgentData.mobile;
-const mobileVerification = document.getElementById('h1-test')
-mobileVerification.textContent = isMobile;
-mobileVerification.classList.add('center-word')
+if(isMobile == true){
+  let indexBody = document.getElementById('index-body')
+  indexBody.style = 'background:red;'
+}
   
