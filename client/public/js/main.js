@@ -101,9 +101,8 @@ setTimeout(()=>{
 },250)
   
 
-
-console.log(window.navigator.userAgent)
-if(/(linux|iphone|windows phone)/gi.test(window.navigator.userAgent)){
-  document.getElementById('index-body').style = 'background:#fff'
+console.log(navigator)
+if(/(linux|iphone|windows phone)/gi.test(navigator.userAgent)){
+  document.getElementById('index-body').style = 'background:yellow'
 }
 
