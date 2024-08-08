@@ -5,6 +5,7 @@ let board = document.querySelectorAll(".scoreboard-list-item");
 let nav = document.getElementById("nav-container");
 let footer = document.getElementById("footer-wrapper");
 const modolu = 20;
+const isMobile = /(linux|iphone|windows phone)/gi.test(navigator.userAgent);
 let percentages = [.50,.45,.40];
 let interval_speed = percentages[Math.floor(Math.random()*percentages.length)]
 export default function playGame(arr, posi, btn, ship) {
@@ -94,23 +95,45 @@ export default function playGame(arr, posi, btn, ship) {
     },
     shootImg: (images) => {
      for (let i = 0; i < images.length; i++) {
-        images[i].onclick = (e) => {
-          copy_wave -= 1;
-          // // console.log(copy_wave);
-          e.target.classList.add("shoot-load");
-          if ([...board].length > 0) {
-            let current = [...board].filter((x) =>
-              /current/g.test(x.children[0].textContent)
-            );
-
-            if (current) {
-              current[0].children[1].textContent =
-                +current[0].children[1].textContent + 1;
-            } else {
-              return null;
+        if(!isMobile){
+          images[i].onclick = (e) => {
+            copy_wave -= 1;
+            // // console.log(copy_wave);
+            e.target.classList.add("shoot-load");
+            if ([...board].length > 0) {
+              let current = [...board].filter((x) =>
+                /current/g.test(x.children[0].textContent)
+              );
+  
+              if (current) {
+                current[0].children[1].textContent =
+                  +current[0].children[1].textContent + 1;
+              } else {
+                return null;
+              }
             }
-          }
-        };
+          };
+        } else {
+          images[i].ontouchstart = (e) => {
+            e.preventDefault()
+            e.target.dispatchEvent(new Event('click'))
+            copy_wave -= 1;
+            // // console.log(copy_wave);
+            e.target.classList.add("shoot-load");
+            if ([...board].length > 0) {
+              let current = [...board].filter((x) =>
+                /current/g.test(x.children[0].textContent)
+              );
+  
+              if (current) {
+                current[0].children[1].textContent =
+                  +current[0].children[1].textContent + 1;
+              } else {
+                return null;
+              }
+            }
+          };
+        }
         images[i].ondrag = (e) => {
           e.preventDefault()
         } 

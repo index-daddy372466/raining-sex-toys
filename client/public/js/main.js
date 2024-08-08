@@ -99,10 +99,5 @@ setTimeout(()=>{
   })
   level_container.classList.add('drop-down-picker')
 },250)
-  
 
-console.log(navigator)
-if(/(linux|iphone|windows phone)/gi.test(navigator.userAgent)){
-  document.getElementById('index-body').style = 'background:yellow'
-}
 
