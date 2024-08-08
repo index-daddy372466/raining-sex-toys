@@ -2,40 +2,15 @@ const bcrypt = require("bcrypt");
 const pg = require("../db/db.js").pool;
 // const { mysqlObj, pool } = require("./db/db.js");
 const LocalStrategy = require("passport-local").Strategy;
+const { GetUserByEmail, GetUserById } = require('../db/commands.js')
 
 function initialize(passport) {
   // get user by email address
-  const getUserByEmail = async (email) => {
-    try{
-      let getUsers = await pg.query('select * from users where email=$1',[email])
-      if(getUsers.rows.length<1){
-        console.log('no user found')
-      }
-      else{
-        return getUsers.rows[0]
-      }
-    }
-    catch(err){
-      console.log(err)
-    }
-  };
-  // get user by id
-  const getUserById = async(id) => {
-    try{
-      let getUsers = await pg.query('select * from users where user_id=$1',[id])
-      if(getUsers.rows.length<1){
-        console.log('no user found')
-      }
-      else{
-        return getUsers.rows[0]
-      }
-    }
-    catch(err){
-      console.log(err)
-    }
-  };
   const authenticateUser = async (email, password, done) => {
-    const user = await getUserByEmail(email);
+    const findUser = new GetUserByEmail('psql',email)
+    const userFound = await findUser.executeQuery();
+    console.log(userFound)
+    let user = userFound
     if (user == null) {
       return done(null, false, { message: "No user found" });
     }
@@ -58,11 +33,14 @@ function initialize(passport) {
   );
 
   // serial/deserial
-  passport.serializeUser(function (user, done) {
+  passport.serializeUser(function (user, done) {  
     return done(null, user);
   });
   passport.deserializeUser(async function (user, done) {
-    return done(null, await getUserById(user.user_id));
+    const findId = new GetUserById('psql',user.user_id)
+    const idFound = await findId.executeQuery();
+    const id = idFound[0]
+    return done(null, id);
   });
 }
 module.exports = initialize;

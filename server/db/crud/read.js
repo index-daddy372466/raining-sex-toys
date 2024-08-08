@@ -97,7 +97,7 @@ router
     try {
       let getUserByEmail = new GetUserByEmail("psql", email);
       let found = await getUserByEmail.executeQuery();
-      return found.length < 1
+      return found
         ? res.send("no users found")
         : res.json({ data: found });
     } catch (err) {

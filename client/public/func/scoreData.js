@@ -1,6 +1,7 @@
+import renderSec from './renderSec.js'
 const token = await fetch("/game/token")
   .then((r) => r.json())
-  .then((d) => d.token);
+  .then((d) => renderSec(d.token));
 const condition = {};
 condition.best = "best";
 condition.worst = "worst";

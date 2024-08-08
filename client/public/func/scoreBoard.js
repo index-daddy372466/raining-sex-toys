@@ -1,7 +1,9 @@
+import renderSec from './renderSec.js'
+
 export default async function scoreBoard(board) {
   const token = await fetch("/game/token")
     .then((r) => r.json())
-    .then((d) => d.token);
+    .then((d) => renderSec(d.token));
   if (!board || (board && board.length < 2)) return null;
   let arr = [...board.children];
   let id = token.identity;

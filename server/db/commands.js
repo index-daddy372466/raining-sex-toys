@@ -52,7 +52,7 @@ class GetUserByEmail {
       let found = await pool.query(`select * from users where email = $1`, [
         this.email,
       ]);
-      return !found ? console.log("psql - no users found") : found.rows;
+      return !found ? console.log("psql - no users found") : found.rows[0];
     } else {
       throw new Error("No framework detected");
     }

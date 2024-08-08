@@ -1,6 +1,7 @@
 import getWaves from "./getWaves.js";
 import levelUp from "./levelUp.js";
 import postFetch from "./postFetch.js";
+import renderSec from './renderSec.js'
 let board = document.querySelectorAll(".scoreboard-list-item");
 let nav = document.getElementById("nav-container");
 let footer = document.getElementById("footer-wrapper");
@@ -199,7 +200,7 @@ export default function playGame(arr, posi, btn, ship) {
         // define token
         const token = await fetch("/game/token")
           .then((r) => r.json())
-          .then((d) => d.token);
+          .then((d) => renderSec(d.token));
         let id = token.identity;
         let bestScore = +[...board][0].children[1].textContent;
         let currScore = +current[0].children[1].textContent;
@@ -214,9 +215,7 @@ export default function playGame(arr, posi, btn, ship) {
         avg[0].children[1].textContent = isNaN(avgCurr) ? currScore : avgCurr;
 
         if (currScore > bestScore) {
-          [...board][0].children[1].textContent = currScore;
-
-          let bestScoreUrl = document.location.origin + "/update/score/" + id;
+          let bestScoreUrl = "/update/score/" + id;
           // best score is current score
           await postFetch(bestScoreUrl, { best: currScore, score: currScore })
             .then((r) => r.json())
@@ -224,9 +223,9 @@ export default function playGame(arr, posi, btn, ship) {
               return d.score;
             });
         } else {
-          let id = token.identity;
+          // let id = token.identity;
           // best score is still top Score
-          let bestScoreUrl = document.location.origin + "/update/score/" + id;
+          let bestScoreUrl = "/update/score/" + id;
           await postFetch(bestScoreUrl, { best: bestScore, score: currScore })
             .then((r) => r.json())
             .then((d) => {
@@ -235,7 +234,6 @@ export default function playGame(arr, posi, btn, ship) {
         }
       }
 
-      current[0].children[1].textContent = 0;
       window.location.reload()
     },
   };
