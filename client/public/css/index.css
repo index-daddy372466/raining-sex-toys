@@ -5,7 +5,8 @@
   text-decoration: none;
   list-style-type: none;
 }
-#svg-container {
+#svg-container,
+#svg-container-min {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -13,15 +14,22 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border:5px solid indigo;
 }
 /* svg and animation */
-div > .svg-class {
+#svg-container > .svg-class {
   position: absolute;
+  opacity: 0;
   height: 100px;
   width: 100px;
-  opacity: 0;
-  /* animation:popout 1s forwards ease-in; */
+}
+#svg-container-min > .svg-class {
+  position: absolute;
+  top:0;
+  right:100px;
+  height: 85px;
+  opacity:.4;
+  width: 85px;
+  z-index:998;
 }
 @keyframes popleft {
   from {
@@ -50,18 +58,26 @@ div > .svg-class {
     transform: translate(100px, -75px) rotate(55deg);
   }
 }
-
 #svg-container > .svg-class.c1 {
   /* border:2px solid red; */
   animation: popleft 0.5s forwards ease-in;
 }
-.c2 {
+#svg-container-min > .svg-class.c1 {
+  transform: translate(-100px, -75px) rotate(-25deg);
+}
+#svg-container > .svg-class.c2 {
   /* border:2px solid green; */
   animation: popup 0.5s forwards ease-in;
 }
-.c3 {
+#svg-container-min > .svg-class.c2 {
+  transform: translate(0, -75px);
+}
+#svg-container > .svg-class.c3 {
   /* border:2px solid blue; */
   animation: popright 0.5s forwards ease-in;
+}
+#svg-container-min > .svg-class.c3 {
+  transform: translate(100px, -75px) rotate(55deg);
 }
 
 body {
@@ -123,6 +139,7 @@ body {
   color: #fff;
   /* border: none; */
   position: absolute;
+  z-index:999;
   right: 25px;
   top: 35px;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
