@@ -20,7 +20,7 @@ footer{
     /* height:100px; */
     width:100%;
     margin-top: 2rem;
-    position:absolute;
+    position:fixed;
     bottom:0;
     left:0;
     overflow-x:hidden;
@@ -72,5 +72,10 @@ footer:hover{
 }
 .column-list-item>.list-link{
     text-decoration: none;
-    color:#fff
+    color:#fff;
+    transition:.5s;
+}
+.column-list-item>.list-link:hover{
+    transition:.25s;
+    color:#f00;
 }

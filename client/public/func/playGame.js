@@ -5,7 +5,9 @@ import postFetch from "./postFetch.js";
 let board = document.querySelectorAll(".scoreboard-list-item");
 let nav = document.getElementById("nav-container");
 let footer = document.getElementById("footer-wrapper");
-
+const modolu = 20;
+let percentages = [0.50,0.45,0.40];
+let interval_speed = percentages[Math.floor(Math.random()*percentages.length)]
 export default function playGame(arr, posi, btn, ship) {
   const warning = document.getElementById("warning"),
     hole = document.querySelector(".list-item>div"),
@@ -70,30 +72,28 @@ export default function playGame(arr, posi, btn, ship) {
     };
     let level = +document.getElementById("level").textContent,
     current_wave = getWaves(level),
-    current_speed =  level < 1 ? 5 : 5 + (.5*level),
+    current_speed =  level < 1 ? 5 : 5 + ((.5*(level))%modolu),
     copy_wave = current_wave,
     genisDone = false,
     gen,
     interval;
-    console.log(current_speed)
   // dildo manager
   const manageDildo = {
     moveImg: (images) => {
-      // console.log(current_speed);
       const warning_boundary = warning.getBoundingClientRect().y;
       images.forEach((pic, index) => {
         let c = pic.getBoundingClientRect().y;
         setInterval(() => {
           c += current_speed;
           pic.style.top = c + "px";
-        }, 100);
+        }, (125));
         if (pic.getBoundingClientRect().y >= warning_boundary) {
           manageDildo.flashWarning();
         }
       });
     },
     shootImg: (images) => {
-      for (let i = 0; i < images.length; i++) {
+     for (let i = 0; i < images.length; i++) {
         images[i].onclick = (e) => {
           copy_wave -= 1;
           // // console.log(copy_wave);
@@ -111,6 +111,15 @@ export default function playGame(arr, posi, btn, ship) {
             }
           }
         };
+        images[i].ondrag = (e) => {
+          e.preventDefault()
+        } 
+        images[i].ondragstart = (e) => {
+          e.preventDefault()
+        } 
+        images[i].ondragend = (e) => {
+          e.preventDefault()
+        } 
       }
     },
     flashWarning: () => {
@@ -249,8 +258,6 @@ export default function playGame(arr, posi, btn, ship) {
           await levelUp();
           // increate speed by 2.5 after each wave
           current_speed += 2.5;
-          console.log(current_speed)
-          // clearInterval(interval);
           copy_wave = getWaves(+document.getElementById("level").textContent);
           current_wave = copy_wave;
           // dildo generation is false
@@ -262,7 +269,7 @@ export default function playGame(arr, posi, btn, ship) {
     },
     +document.getElementById("level").textContent % 2 == 0 &&
       +document.getElementById("level").textContent < 1
-      ? 1250
-      : 0.75 * (1250 - +document.getElementById("level").textContent)
+      ? 1000
+      : interval_speed * (1000 - (+document.getElementById("level").textContent % modolu))
   );
 }

@@ -4,7 +4,7 @@
   height: 100%;
   width: 100%;
   display: flex;
-  justify-content: end;
+  justify-content: center;
   align-items: center;
   overflow: hidden;
   overflow-x: scroll;
@@ -15,7 +15,7 @@
 
 #scores-container {
   position: absolute;
-  width: 75%;
+  max-width: 50%;
   min-width:0;
   max-height: 500px;
   min-height: 150px;
@@ -83,6 +83,7 @@ body {
 }
 
 aside.side-bar {
+  margin: 0 0 0 2rem;
   position: fixed;
   left: 0;
   bottom: 0;

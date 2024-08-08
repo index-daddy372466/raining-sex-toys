@@ -15,8 +15,7 @@ router.route("/login").post(
   );
   // home or game if authenticated
   router.get('/',(req,res)=>{
-    // res.redirect('/home')
-    res.redirect('/login')
+    res.redirect('/home')
   })
   // home
   router.route("/home").get( (req, res) => {

@@ -52,15 +52,15 @@ div > .svg-class {
 }
 
 #svg-container > .svg-class.c1 {
-  border:2px solid red;
+  /* border:2px solid red; */
   animation: popleft 0.5s forwards ease-in;
 }
 .c2 {
-  border:2px solid green;
+  /* border:2px solid green; */
   animation: popup 0.5s forwards ease-in;
 }
 .c3 {
-  border:2px solid blue;
+  /* border:2px solid blue; */
   animation: popright 0.5s forwards ease-in;
 }
 
