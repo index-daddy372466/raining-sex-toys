@@ -104,8 +104,7 @@ setTimeout(()=>{
 
 // console.log(window.navigator.userAgentData.mobile)
 let isMobile = window.navigator.userAgentData.mobile;
-const mobileVerification = document.createElement('h1')
+const mobileVerification = document.getElementById('h1-test')
 mobileVerification.textContent = isMobile;
 mobileVerification.classList.add('center-word')
-document.body.appendChild(mobileVerification) 
   
