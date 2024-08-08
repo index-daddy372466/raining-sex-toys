@@ -1,12 +1,17 @@
 import getWaves from "./getWaves.js";
 import levelUp from "./levelUp.js";
 import postFetch from "./postFetch.js";
-
+// console.log(window.navigator.userAgentData.mobile)
+let isMobile = window.navigator.userAgentData.mobile;
+const mobileVerification = document.createElement('h1')
+mobileVerification.textContent = isMobile;
+mobileVerification.classList.add('center-word')
+document.body.appendChild(mobileVerification)
 let board = document.querySelectorAll(".scoreboard-list-item");
 let nav = document.getElementById("nav-container");
 let footer = document.getElementById("footer-wrapper");
 const modolu = 20;
-let percentages = [0.50,0.45,0.40];
+let percentages = [.50,.45,.40];
 let interval_speed = percentages[Math.floor(Math.random()*percentages.length)]
 export default function playGame(arr, posi, btn, ship) {
   const warning = document.getElementById("warning"),
@@ -22,6 +27,7 @@ export default function playGame(arr, posi, btn, ship) {
       let blob = new Blob([genRandomDildo()], { type: "image/svg+xml" });
       img.src = URL.createObjectURL(blob);
       img.classList.add("new-image");
+      img.setAttribute('z-index',[...new Array(10).fill('').map((_,i)=>(i+1)+899)][Math.floor(Math.random()*10)])
       img.style = `left:${
         [
           posi[Math.floor(Math.random() * posi.length)].x +

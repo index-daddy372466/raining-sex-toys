@@ -197,3 +197,10 @@ body {
 background:#fff;
 color:#000;
 }
+
+.center-work{
+  position:absolute;
+  font-size:40px;
+  background:#000;
+  color:#f00;
+}
