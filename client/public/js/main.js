@@ -100,12 +100,10 @@ setTimeout(()=>{
   level_container.classList.add('drop-down-picker')
 },250)
   
-  
 
-// console.log(window.navigator.userAgentData.mobile)
-let isMobile = window.navigator.userAgentData.mobile;
-if(isMobile == true){
-  let indexBody = document.getElementById('index-body')
-  indexBody.style = 'background:red;'
+
+console.log(window.navigator.userAgent)
+if(/(linux|iphone|windows phone)/gi.test(window.navigator.userAgent)){
+  document.getElementById('index-body').style = 'background:#fff'
 }
-  
+
