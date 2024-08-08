@@ -1,12 +1,6 @@
 import getWaves from "./getWaves.js";
 import levelUp from "./levelUp.js";
 import postFetch from "./postFetch.js";
-// console.log(window.navigator.userAgentData.mobile)
-let isMobile = window.navigator.userAgentData.mobile;
-const mobileVerification = document.createElement('h1')
-mobileVerification.textContent = isMobile;
-mobileVerification.classList.add('center-word')
-document.body.appendChild(mobileVerification)
 let board = document.querySelectorAll(".scoreboard-list-item");
 let nav = document.getElementById("nav-container");
 let footer = document.getElementById("footer-wrapper");
