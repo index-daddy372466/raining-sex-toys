@@ -10,7 +10,6 @@ const session = require("express-session");
 const routingMiddleware = require("./lib/routingMiddleware.js");
 const initializePassport = require("./lib/passport.config.js");
 const MemoryStore = require("memorystore")(session);
-const nocache = require("nocache");
   
 initializePassport(passport);
 
@@ -24,7 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
     cookie: { maxAge: 21600000, secure: false, httpOnly: false },
-    store: new session.MemoryStore({
+    store: new MemoryStore({
       checkPeriod: 21600000,
     }),
     secret: process.env.SECRET,
@@ -36,8 +35,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(helmet());
 routingMiddleware(app);
-
-app.use(nocache());
 
 // listen
 app.listen(PORT, () => {
