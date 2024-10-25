@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/auth.css" />
     <link rel="stylesheet" href="/css/index.css" />
-    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/footer.css" />
     <title>Register</title>
   </head>
   <body>
@@ -14,15 +14,25 @@
     <!-- psql -->
     <h1>Register</h1>
     <form action="/create/psql/register" method="POST">
-      <input type="text" name="display_name" placeholder="Name" />
-      <input type="email" name="email" placeholder="Email" />
-      <input type="password" name="password" placeholder="Password" />
-      <button type="submit">Submit</button>
+      <div class="form-div">
+        <input type="text" name="display_name" placeholder="Name" spellcheck="false" autocomplete="off">
+        <input type="email" name="email" placeholder="Email" spellcheck="false" autocomplete="off"/>
+        <input type="password" name="password" placeholder="Password" spellcheck="false" autocomplete="off"/>
+        <button type="submit">Submit</button>
+      </div>
+      <div class="img-container">
+        <!-- person container -->
+        <div id="person-container">
+          <!-- head -->
+          <div class="person-head"></div> 
+          <!-- body -->
+          <div class="person-body"></div>
+        </div>
+      </div>
     </form>
     <!-- footer -->
-    <% if(!isAuthenticated){%> <%-
-      include('../partials/unsecured/footer.ejs') %> <% } else { %> <%-
-      include('../partials/secured/footer.ejs') %> <% } %>
+    <% if(!isAuthenticated){%> <%- include('../partials/unsecured/footer.ejs')
+    %> <% } else { %> <%- include('../partials/secured/footer.ejs') %> <% } %>
   </body>
   <script src="/js//auth.js"></script>
 </html>

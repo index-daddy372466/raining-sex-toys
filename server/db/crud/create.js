@@ -9,7 +9,11 @@ router.use(express.urlencoded({ extended: true }));
 
 // register page
 router.route("/register").get((req, res) => {
-  res.sendFile(path.resolve(__dirname, "../../../client/views/register.html"));
+  // create a function to validate that off is the result
+  const secureOff = () => {
+    return 'off'
+  }
+  res.render('register.ejs');
 });
 
 // register a user with psql
