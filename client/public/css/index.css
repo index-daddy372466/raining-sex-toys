@@ -181,8 +181,14 @@ body {
   scroll-behavior: smooth;
   overflow-y:scroll;
 }
+@media screen and (max-width:945px){
+  #level-choice-container{
+    max-width:175px;
+    min-width:125px;
+  }
+}
 .drop-down-picker {
-  transform: translate(0, 125px);
+  transform: translate(0, 150px);
   transition: 1s;
 }
 .level-list-container {
@@ -207,7 +213,6 @@ body {
 }
 
 .level-list > li {
-  border: 2px solid lime;
   height:inherit;
   padding: 1rem 1.5rem;
   background: #000;
@@ -224,3 +229,4 @@ body {
 background:#fff;
 color:#000;
 }
+

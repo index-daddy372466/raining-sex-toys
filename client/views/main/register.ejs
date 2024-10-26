@@ -15,10 +15,10 @@
     <h1>Register</h1>
     <form action="/create/psql/register" method="POST">
       <div class="form-div">
-        <input type="text" name="display_name" placeholder="Name" spellcheck="false" autocomplete="off">
-        <input type="email" name="email" placeholder="Email" spellcheck="false" autocomplete="off"/>
-        <input type="password" name="password" placeholder="Password" spellcheck="false" autocomplete="off"/>
-        <button type="submit">Submit</button>
+        <input type="text" name="display_name" placeholder="Name" spellcheck="false" autocomplete="off" required>
+        <input type="email" name="email" placeholder="Email" spellcheck="false" autocomplete="off" required/>
+        <input type="password" name="password" placeholder="Password" spellcheck="false" autocomplete="off" required/>
+        <button type="submit" class="submit-btn sub">Submit</button>
       </div>
       <div class="img-container">
         <!-- person container -->

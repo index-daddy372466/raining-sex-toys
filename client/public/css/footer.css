@@ -2,7 +2,6 @@ footer{
     padding:.5rem;
     background:#000;
     border:3px solid #000;
-    /* height:100px; */
     width:100%;
     margin-top: 2rem;
     position:fixed;
@@ -17,17 +16,15 @@ footer:hover{
     transition:.5s;
 }
 #footer-wrapper{
+    padding-right: 1rem;
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: end;
-    margin-right:-2rem;
-    /* border:2px solid yellow; */
+    width:100%;
 }
 
 #columns-container{
-    /* border:3px solid blue; */
-    width:50%;
     display:flex;
     flex-direction: row;
     justify-content: center;
@@ -35,7 +32,6 @@ footer:hover{
     gap:2rem;
 }
 .column-section{
-    /* border:3px solid green; */
     height:100%;
     display:flex;
     flex-direction: column;

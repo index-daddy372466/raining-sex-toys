@@ -42,6 +42,7 @@ export default function playGame(arr, posi, btn, ship) {
       // </li>;
       let newHole = document.createElement("li");
       newHole.classList.add("list-item");
+      // console.log(document.querySelectorAll(".list-item"))
       let div = document.createElement("div");
       div.classList.add("list-item>div");
       newHole.appendChild(div);
@@ -74,7 +75,9 @@ export default function playGame(arr, posi, btn, ship) {
     };
     let level = +document.getElementById("level").textContent,
     current_wave = getWaves(level),
-    current_speed =  level < 1 ? 5 : 5 + ((.5*(level))%modolu),
+    n=0,
+    // current_speed =  level < 1 ? 5 : 5 + ((.5*(level))%modolu),
+    current_speed =  level < 1 ? 5 : 5 + (level+(n++)),
     copy_wave = current_wave,
     genisDone = false,
     gen,
@@ -85,10 +88,14 @@ export default function playGame(arr, posi, btn, ship) {
       const warning_boundary = warning.getBoundingClientRect().y;
       images.forEach((pic, index) => {
         let c = pic.getBoundingClientRect().y;
-        setInterval(() => {
+        pic.classList.add('smooth-trans')
+        // setInterval(() => {
+        //   c += current_speed;
+        //   pic.style.top = c + "px";
+        // }, (125));
           c += current_speed;
+          console.log(current_speed)
           pic.style.top = c + "px";
-        }, (125));
         if (pic.getBoundingClientRect().y >= warning_boundary) {
           manageDildo.flashWarning();
         }
@@ -273,7 +280,8 @@ export default function playGame(arr, posi, btn, ship) {
         // dildo generation is done on wave
         genisDone = true;
         if (copy_wave == 0) {
-          if (+document.getElementById("level").textContent % 2 == 0) {
+          if (+document.getElementById("level").textContent % 2 == 0 &&
+            configDev(document.querySelectorAll(".list-item"),document.body.clientWidth) ) {
             generateHole();
           }
           await levelUp();
@@ -294,3 +302,18 @@ export default function playGame(arr, posi, btn, ship) {
       : interval_speed * (1000 - (+document.getElementById("level").textContent % modolu))
   );
 }
+
+function configDev(arr,screenwidth){
+  // phone/small device
+if(screenwidth <= 495){
+  return arr.length < 5
+}
+// ipad/tablet device
+if(screenwidth > 495 && screenwidth <= 1020){
+  return arr.length < 7
+}  
+// desktop/laptop device
+if(screenwidth > 1020){
+  return arr.length < 10
+}
+}  

@@ -91,6 +91,9 @@ body{
     width:75%;
     border-radius:8px;
     transition:.25s;
+    border:none;
+    box-shadow: inset 0 0 4px 1.5px #000000;
+    outline:none;
 }
 #dialog{
     border:none;
