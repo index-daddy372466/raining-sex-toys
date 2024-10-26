@@ -4,18 +4,22 @@
 const Pool = require("pg-pool");
 // const mysql = require("mysql2");
 require("dotenv").config();
-// const Sequelize = require("sequelize").Sequelize;
-// let sequelize
-// psql
-// if (process.env.URI) {
-//   sequelize = new Sequelize(process.env.URI);
-// } else {
-//   sequelize = new Sequelize(process.env.DB, process.env.DBU, process.env.DBPD,  {
-//     host: process.env.DBH,
-//     dialect: "postgres",
-//     ssl: true,
-//   });
-// }
+const Sequelize = require("sequelize").Sequelize;
+let sequelize
+psql
+if (process.env.URI) {
+  sequelize = new Sequelize(process.env.URI,  {
+    host: process.env.DBH,
+    dialect: "postgres",
+    ssl: true,
+  });
+} else {
+  sequelize = new Sequelize(process.env.DB, process.env.DBU, process.env.DBPD,  {
+    host: process.env.DBH,
+    dialect: "postgres",
+    ssl: true,
+  });
+}
 // mysql
 // if (process.env.URI) {
 //   sequelize = new Sequelize(process.env.URI);
@@ -64,6 +68,9 @@ const poolConfig = {
   host: process.env.DBH,
   port: process.env.DBP,
   password: process.env.DBPD,
+  ssl:{
+    rejectUnauthorized:false,
+  }
 };
 // const pool = mysql.createPool(poolConfig)
 // testmysql()
