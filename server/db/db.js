@@ -6,7 +6,7 @@ const Pool = require("pg-pool");
 require("dotenv").config();
 const Sequelize = require("sequelize").Sequelize;
 let sequelize
-psql
+// psql
 if (process.env.URI) {
   sequelize = new Sequelize(process.env.URI,  {
     host: process.env.DBH,
