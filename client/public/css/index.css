@@ -183,8 +183,8 @@ body {
 }
 @media screen and (max-width:945px){
   #level-choice-container{
-    max-width:175px;
-    min-width:125px;
+    max-width:225px;
+    min-width:175px;
   }
 }
 .drop-down-picker {
