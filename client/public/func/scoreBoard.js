@@ -5,7 +5,7 @@ export default async function scoreBoard(board) {
     .then((r) => r.json())
     .then((d) => renderSec(d.token));
   if (!board || (board && board.length < 2)) return null;
-  let arr = [...board.children];
+  let arr = [...board.children].filter(elem => !elem.classList.contains('not-scores'));
   let id = token.identity;
   // fetch scores by user id
   if (board.children.length > 2) {

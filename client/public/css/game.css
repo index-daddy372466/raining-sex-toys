@@ -9,6 +9,7 @@ justify-content: center; */
   box-sizing: border-box;
   list-style: none;
   text-decoration: none;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
@@ -42,7 +43,6 @@ body {
   justify-content: center;
   opacity: 0.45;
   font-size:299px;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 /* spacehship */
 #spaceship-container {
@@ -131,7 +131,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   transition: 0.25s;
   font-size: 25px;
   box-shadow: 0 0.5rem 10px 0.4px #33333399;
@@ -223,12 +222,14 @@ body {
 }
 
 #scoreboard-container{
-  border:3px solid purple;
+  border:8px double rgb(44, 141, 226);
+  background:#fff;
+  border-radius: 0 12px 12px 0;
   position:absolute;
   left:0;
   bottom:0;
   height:400px;
-  width:100px;
+  width:125px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -241,8 +242,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-  gap:1rem;
+  gap:.5rem;
+  overflow-y: scroll;
+}
+.just-center{
+  justify-content: center;
+}
+.just-start{
+  justify-content: start;
 }
 .scoreboard-list-container>li.scoreboard-list-item{
   display: flex;
@@ -250,9 +257,15 @@ body {
   align-items: center;
   justify-content: center;
   gap:1rem;
-  border:3px solid green;
+  width:100%;
+  border:4px double rgb(0, 0, 0);
 }
-
+.scoreboard-list-item>div{
+  font-size:24px;
+}
+.sclaepsql-tag{
+  transform:scale(.78);
+}
 .hide-blocks{
   transform:translate(-200px,0);
 }

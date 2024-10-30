@@ -18,7 +18,7 @@ export default function startGame(
   btn.onclick = async (e) => {
     // remove level picker
     level_container.classList.add('disappear')
-    let arr = [...board.children];
+    let arr = [...board.children].filter(elem => !elem.classList.contains('not-scores'));;
 
     if (arr.length > 1) {
       let attempts = arr.filter((x) =>
